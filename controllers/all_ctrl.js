@@ -1,4 +1,3 @@
-const { assert } = require('console')
 const path = require('path')
 const model = require('../models/model')
 
@@ -80,8 +79,8 @@ async function perform_registration(req, res) {
 // 取得用戶資訊
 async function get_info(req, res) {
     try {
-        const account = req.body.account
-        const password = req.body.password
+        const account = req.query.account
+        const password = req.query.password
 
         let result = await model.get_user_info(account, password)
         if (result) {
@@ -99,8 +98,8 @@ async function get_info(req, res) {
                     <p>建立時間: ${result.create_time}</p>
                 </body>
                 </html>
-            `;
-            res.send(userDataHTML);
+            `
+            res.send(userDataHTML)
         } else {
             console.error('ctrl：帳號或密碼不正確')
             res.status(500).json({ error: '查無帳號，請提供正確的帳號密碼' }) // 返回錯誤消息

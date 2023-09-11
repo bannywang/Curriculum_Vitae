@@ -1,12 +1,3 @@
-/*!
- * Start Bootstrap - Resume v7.0.6 (https://startbootstrap.com/theme/resume)
- * Copyright 2013-2023 Start Bootstrap
- * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-resume/blob/master/LICENSE)
- */
-//
-// Scripts
-//
-
 // Collapse responsive navbar when a nav item is clicked
 document.addEventListener('DOMContentLoaded', () => {
     const navItems = document.querySelectorAll('.navbar-nav .nav-link')
@@ -74,6 +65,8 @@ previewButton.addEventListener('click', function () {
 //! CSS ----------------------------------------------------------------
 const colorSelector = document.getElementById('colorSelector')
 const fontWeightSelector = document.getElementById('fontWeightSelector')
+const fontSizeSelector = document.getElementById('fontSizeSelector')
+const fontFamilySelector = document.getElementById('fontFamilySelector')
 const editableText = document.getElementById('editableText')
 
 // 添加事件监听器以根据用户选择更新文本颜色
@@ -86,6 +79,24 @@ colorSelector.addEventListener('change', function () {
 fontWeightSelector.addEventListener('change', function () {
     const selectedFontWeight = fontWeightSelector.value
     editableText.style.fontWeight = selectedFontWeight
+})
+
+// 添加事件监听器以根据用户选择更新字体大小
+fontSizeSelector.addEventListener('change', function () {
+    const selectedFontSize = fontSizeSelector.value
+    editableText.style.fontSize = selectedFontSize
+})
+
+// 添加事件监听器以根据用户选择更新字体族
+fontFamilySelector.addEventListener('change', function () {
+    const selectedFontFamily = fontFamilySelector.value
+    editableText.style.fontFamily = selectedFontFamily
+})
+
+// 将文本转换为大写
+textTransformSelector.addEventListener('change', function () {
+    const selectedTextTransform = textTransformSelector.value
+    editableText.style.textTransform = selectedTextTransform
 })
 
 //! 按鈕出現 --------------------------------
@@ -262,7 +273,7 @@ function startGame() {
     }
 }
 
-// 在這裡放置您的 JavaScript 代碼
+// 後端回傳文字監聽
 document.getElementById('myForm').addEventListener('submit', function (event) {
     event.preventDefault() // 防止表單提交刷新頁面
 

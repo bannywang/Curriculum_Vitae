@@ -24,6 +24,7 @@ async function get_user_info(account, password) {
 
         // 如果有匹配的記錄，返回用戶資訊
         if (result.length > 0) {
+            console.log(result[0]);
             return result[0]
         } else {
             console.log('後端回：查無用戶')
