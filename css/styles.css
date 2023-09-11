@@ -11213,7 +11213,7 @@ section.resume-section .resume-section-content {
     cursor: pointer;
     font-size: 16px;
     margin-top: 10px;
-    margin-left:-1px;
+    margin-left: -1px;
     border-radius: 3px;
     transition: background-color 0.2s; /* 添加过渡效果 */
 }
@@ -11301,15 +11301,14 @@ button {
     font-size: 16px;
     margin-top: 10px; /* 调整按钮上边距 */
     display: block; /* 让按钮独占一行 */
-    margin: 20px 10px   ; /* 居中按钮 */
+    margin: 20px 10px; /* 居中按钮 */
     border-radius: 5px; /* 圆角按钮 */
 }
 
-#register_btn{
+#register_btn {
     margin-top: -85px;
-    margin-left: 77px
+    margin-left: 77px;
 }
-
 
 #JavaScriptContent {
     display: flex;
@@ -11320,7 +11319,7 @@ button {
 #snakeCanvas {
     width: 400px;
     height: 400px;
-    background-color: #FFF; /* 画布背景色 */
+    background-color: #fff; /* 画布背景色 */
     border: 2px solid #333; /* 画布边框样式 */
 }
 
@@ -11344,4 +11343,3 @@ button {
 #register_btn {
     margin-left: 65px;
 }
-
