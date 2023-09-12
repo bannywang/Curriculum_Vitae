@@ -1,13 +1,12 @@
 const path = require('path')
 const model = require('../models/model')
 
-// 取得主頁
 async function get_main_html(req, res) {
-    // 獲取 index.html 的路徑，使用 'path' 模塊的 'join' 方法
-    const indexPath = path.join(process.cwd(), 'index.html')
-
-    // 使用 'res.sendFile' 方法將 index.html 發送到客戶端
-    res.sendFile(indexPath)
+    // 渲染名為 'ejs-example' 的 EJS 模板，並傳遞動態數據
+    res.render('index', {
+        pageTitle: '王瀚邑的個人履歷',
+        username: '王瀚邑',
+    })
 }
 
 // 前端傳回文字加以處理回傳
@@ -31,48 +30,12 @@ async function perform_registration(req, res) {
 
         const registrationResult = await model.register(account, name, phone, password)
 
-        if (registrationResult.success) {
-            res.send(`
-                <html>
-                <head>
-                    <title>註冊成功</title>
-                </head>
-                <body>
-                    <h1>註冊成功</h1>
-                    <p>恭喜 ${registrationResult.name} 成功註冊！</p>
-                    <!-- 这里可以放一些其他内容或链接 -->
-                </body>
-                </html>
-            `)
-        } else {
-            // 注册失败，返回包含错误提示的HTML页面
-            res.send(`
-                <html>
-                <head>
-                    <title>註冊失敗</title>
-                </head>
-                <body>
-                    <h1>註冊失敗</h1>
-                    <p>${registrationResult.message}</p>
-                    <!-- 这里可以放一些其他内容或链接 -->
-                </body>
-                </html>
-            `)
-        }
+        // 渲染 register.ejs 並傳遞 registrationResult 變數
+        res.render('register', { registrationResult })
     } catch (error) {
+        // 處理錯誤
         console.error('HTTP请求处理失败：', error)
-        res.status(500).send(`
-            <html>
-            <head>
-                <title>伺服器錯誤</title>
-            </head>
-            <body>
-                <h1>伺服器錯誤</h1>
-                <p>很抱歉，伺服器發生錯誤。</p>
-                <!-- 这里可以放一些其他内容或链接 -->
-            </body>
-            </html>
-        `)
+        res.status(500).send('伺服器錯誤')
     }
 }
 
