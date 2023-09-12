@@ -1,12 +1,17 @@
 const { connection } = require('../database/connection')
+const { format_date_time } = require('../models/tool') // 格式化時間
 
 // 取得全部使用者資訊
 async function get_all_user_info() {
     try {
         const query = 'SELECT * FROM user_info'
         const [results] = await connection.query(query)
-        console.log('用戶資料', results)
-        return results // 回傳用戶資料
+        const formatted_results = results.map((user_info) => {
+            user_info.create_time = format_date_time(user_info.create_time)
+            return user_info
+        })
+        console.log('用戶資料', formatted_results)
+        return formatted_results // 回傳用戶資料
     } catch (error) {
         console.error('無法獲取用戶資料:', error)
         return [] // 回傳空陣列表示發生錯誤或沒有用戶資料
@@ -24,8 +29,10 @@ async function get_user_info(account, password) {
 
         // 如果有匹配的記錄，返回用戶資訊
         if (result.length > 0) {
-            console.log(result[0]);
-            return result[0]
+            const user_info = result[0]
+            user_info.create_time = format_date_time(user_info.create_time) // 格式化日期时间
+            console.log(user_info)
+            return user_info
         } else {
             console.log('後端回：查無用戶')
             return null // 找不到匹配的用戶

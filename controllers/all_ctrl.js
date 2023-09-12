@@ -42,34 +42,14 @@ async function perform_registration(req, res) {
 // 取得用戶資訊
 async function get_info(req, res) {
     try {
-        const account = req.query.account
-        const password = req.query.password
+        const account = req.query.account // 使用者帳號
+        const password = req.query.password // 使用者密碼
 
-        let result = await model.get_user_info(account, password)
-        if (result) {
-            const userDataHTML = `
-                <html>
-                <head>
-                    <title>用戶資料</title>
-                </head>
-                <body>
-                    <h1>用戶資料</h1>
-                    <p>ID: ${result.id}</p>
-                    <p>帳號: ${result.account}</p>
-                    <p>姓名: ${result.name}</p>
-                    <p>電話: ${result.phone}</p>
-                    <p>建立時間: ${result.create_time}</p>
-                </body>
-                </html>
-            `
-            res.send(userDataHTML)
-        } else {
-            console.error('ctrl：帳號或密碼不正確')
-            res.status(500).json({ error: '查無帳號，請提供正確的帳號密碼' }) // 返回錯誤消息
-        }
+        let result = await model.get_user_info(account, password) // 獲取使用者資訊
+        res.render('get_info', { result })
     } catch (error) {
-        console.error('ctrl:註冊時發生錯誤：', error)
-        res.status(500).json({ error: '伺服器錯誤，請稍後再試。' }) // 返回錯誤消息
+        console.error('ctrl:獲取使用者信息時發生錯誤：', error)
+        res.status(500).json({ error: '伺服器錯誤，請稍後再試。' }) // 返回錯誤訊息
     }
 }
 
