@@ -11347,3 +11347,9 @@ button {
 #skill_title {
     color: #bd5d38;
 }
+
+.active {
+    background-color: #CDA892;
+    transition: background-color 0.5s ease;
+    color: #ffffff;
+}

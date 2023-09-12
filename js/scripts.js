@@ -30,6 +30,33 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 })
 
+// 获取所有导航链接
+const navLinks = document.querySelectorAll('.nav-link')
+const sections = document.querySelectorAll('section')
+
+// 添加点击事件监听器
+navLinks.forEach((link) => {
+    link.addEventListener('click', () => {
+        // 移除所有导航链接的背景颜色
+        navLinks.forEach((navLink) => {
+            navLink.classList.remove('active')
+        })
+
+        // 添加背景颜色到被点击的链接
+        link.classList.add('active')
+
+        // 滚动到相关部分的位置
+        const sectionId = link.getAttribute('href').slice(1)
+        const relatedSection = document.getElementById(sectionId)
+        if (relatedSection) {
+            window.scrollTo({
+                top: relatedSection.offsetTop,
+                behavior: 'smooth', // 平滑滚动
+            })
+        }
+    })
+})
+
 //! back to top ----------------------------------------------------------------
 
 window.addEventListener('scroll', function () {
