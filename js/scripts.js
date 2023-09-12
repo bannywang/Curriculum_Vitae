@@ -145,6 +145,8 @@ window.onload = function () {
 
 //! JS 貪食蛇 ----------------------------------------------------------------
 
+
+
 // 獲取畫布和繪圖上下文
 var canvas = document.getElementById('snakeCanvas')
 var context = canvas.getContext('2d')

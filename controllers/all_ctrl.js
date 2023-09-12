@@ -29,7 +29,6 @@ async function perform_registration(req, res) {
         const password = req.body.new_password
 
         const registrationResult = await model.register(account, name, phone, password)
-
         // 渲染 register.ejs 並傳遞 registrationResult 變數
         res.render('register', { registrationResult })
     } catch (error) {

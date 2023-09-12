@@ -11324,17 +11324,23 @@ button {
 }
 
 #startButton {
-    color: #fff; /* 文本颜色 */
-    padding: 10px 20px; /* 内边距 */
-    font-size: 16px; /* 字体大小 */
-    border: none; /* 移除边框 */
-    cursor: pointer; /* 鼠标悬停样式 */
-    transition: background-color 0.3s ease; /* 平滑的背景色过渡 */
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
     margin-bottom: 50px;
 }
 
 #startButton:hover {
     background-color: #45a049; /* 按钮悬停时的背景色 */
+}
+
+.virtual-button {
+    font-size: 24px;
+    padding: 5px 10px;
+    margin: 5px;
 }
 
 #confirm_btn {
