@@ -11253,6 +11253,12 @@ textarea:hover {
     display: none;
 }
 
+.fade-in {
+    opacity: 0; 
+    transition: opacity 0.5s ease-in;
+}
+
+
 /* 自定义下拉框样式 */
 .dropdown-container {
     position: relative;
@@ -11358,4 +11364,38 @@ button {
     background-color: #CDA892;
     transition: background-color 0.5s ease;
     color: #ffffff;
+}
+
+#subtitle {
+    margin-top: -8px;
+    margin-bottom: 12px
+}
+
+#myForm {
+    margin-top: -10px;
+}
+
+
+#generateButton {
+    margin-left: -2px;
+}
+
+#qrcode {
+    transition: opacity 0.3s ease-in-out;
+    opacity: 0;
+}
+
+.input-button-container {
+    display: flex;
+    align-items: center; /* 垂直置中 */
+}
+
+#urlInput {
+    flex-grow: 1; /* 讓輸入框自動填滿剩餘空間 */
+    margin-right: 10px; /* 增加右邊的間距 */
+}
+
+
+#generateIdCardButton {
+    margin-left: -2px;
 }

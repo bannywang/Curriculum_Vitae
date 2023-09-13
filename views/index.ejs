@@ -48,8 +48,9 @@
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#experience">工作經歷</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#education">教育程度</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#skills">技能</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#tool">小工具</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#interests">個人興趣</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#project">專案連結</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#project">開發經驗</a></li>
                 </ul>
             </div>
         </nav>
@@ -58,7 +59,7 @@
             <!-- 關於我-->
             <section class="resume-section" id="about">
                 <div class="resume-section-content">
-                    <h1 class="mb-0" style="margin-top: 50px">
+                    <h1 class="mb-0" style="margin-top: 30px">
                         Han Yi
                         <span class="text-primary">Wang</span>
                     </h1>
@@ -68,7 +69,7 @@
                     </div>
                     <p class="lead mb-5">
                         Hello！我是一位來自高雄熱愛 Coding
-                        的年輕人。雖然我並非出身在程式背景，曾經在設計和行銷領域工作，但我的父親一直教導我工程師的世界擁有無限的可能性。這個世界有很多種與電腦溝通的語言，可以實現無限的創意，就像現今的人工智慧（AI）正在深刻地改變我們的生活。
+                        的年輕人。雖然我並非出身在程式背景，曾經在設計和行銷領域工作，但我的父親一直教導我工程師的世界擁有無限的可能性。這個世界有很多種與電腦溝通的語言，可以實現很多意想不到的事，加上我又是個很多想法的人，對於用程式語言創造出別人喜歡使用的介面與程式，讓我非常的快樂。
                         <br />
                         <br />
                         有一次的機會當我接觸到 HTML 和 CSS ，並使用 Bootstrap
@@ -89,6 +90,7 @@
                     </div>
                 </div>
             </section>
+
             <hr class="m-0" />
 
             <!-- 工作經歷-->
@@ -101,7 +103,7 @@
                             <h3 class="mb-0">電商創業</h3>
                             <div class="subheading mb-3">E-commerce entrepreneurship</div>
                             <p>
-                                後疫情時期，受新冠影響的人群越來越多採用網路購物的模式，這段期間有剛好搭上順風車，定位潛在客群提，提供他們可能會喜愛的商品並進行有針對性的宣傳，採用了一般和團體購物的模式，讓消費者能夠輕鬆地獲得他們所喜愛的物品。
+                                後疫情時期，受新冠影響的人群越來越多採用網路購物的模式，這段期間有剛好搭上順風車，定位潛在客群，提供他們可能會喜愛的商品並進行有針對性的宣傳，採用了一般和團體購物的模式，讓消費者能夠輕鬆地獲得他們所喜愛的物品。
                             </p>
                         </div>
                         <div class="flex-shrink-0"><span class="text-primary">April 2022 - Present</span></div>
@@ -121,7 +123,7 @@
                         <div class="flex-grow-1">
                             <h3 class="mb-0">兵役期間</h3>
                             <div class="subheading mb-3">soldier</div>
-                            <p>服役期間，有幸擔任值星的職務，這個經驗讓我學會了如何有效地管理人員。</p>
+                            <p>服役期間，有幸擔任幹部的職務，這個經驗讓我學會了如何有效地管理人員。</p>
                         </div>
                         <div class="flex-shrink-0">
                             <span class="text-primary">September 2019 - December 2019</span>
@@ -167,11 +169,12 @@
 
             <hr class="m-0" />
 
-            <!-- Skills-->
+            <!-- 技能-->
             <section class="resume-section" id="skills">
                 <div class="resume-section-content">
                     <h2 class="mb-5" style="margin-top: 50px">技能</h2>
                     <div class="subheading mb-3">Programming Languages & Tools</div>
+                    <div id="subtitle">點選圖標看更多</div>
                     <ul class="list-inline dev-icons">
                         <li class="list-inline-item" onclick="showContent('html5')">
                             <i class="fab fa-html5"></i>
@@ -197,127 +200,17 @@
                     <!-- HTML 5 -->
                     <div id="html5Content" class="hidden">
                         <div class="subheading mb-3" id="skill_title">HTML 5</div>
+                        <div id="subtitle">輸入一些文字</div>
                         <textarea id="htmlInput" rows="5" cols="50" placeholder="輸入一些文字..."></textarea>
+                        <div id="charCount">剩餘字數：50</div>
                         <br />
                         <button id="previewButton" class="btn btn-primary">預覽</button>
-                        <div id="preview">我會顯示在這邊</div>
-                    </div>
-
-                    <!-- Node JS -->
-                    <div id="Node.jsContent" class="hidden">
-                        <div class="subheading mb-3" id="skill_title">Node.js</div>
-                        <form id="myForm" action="/process" method="post">
-                            <label for="userInput">請輸入您的文字：</label>
-                            <input type="text" id="userInput" name="userInput" />
-                            <button type="submit" class="btn btn-primary">提交</button>
-                        </form>
-                        <div id="response1">服務器響應將顯示在這裡</div>
-                    </div>
-
-                    <!-- MySQL -->
-
-                    <!-- 註冊 -->
-                    <div
-                        class="modal fade"
-                        id="exampleModal"
-                        tabindex="-1"
-                        role="dialog"
-                        aria-labelledby="exampleModalLabel"
-                        aria-hidden="true"
-                    >
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">註冊</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <!-- 在表單中使用一致的名稱 -->
-                                <form id="register" action="/user_register" method="post">
-                                    <div class="modal-body">
-                                        <div class="mb-3">
-                                            <label for="new_account" class="form-label">帳號</label>
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                                id="new_account"
-                                                name="new_account"
-                                                required
-                                            />
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="new_name" class="form-label">名字</label>
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                                id="new_name"
-                                                name="new_name"
-                                                required
-                                            />
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="new_phone" class="form-label">電話</label>
-                                            <input
-                                                type="tel"
-                                                class="form-control"
-                                                id="new_phone"
-                                                name="new_phone"
-                                                pattern="[0-9]{10}"
-                                                title="請輸入有效的10位數字電話號碼"
-                                                required
-                                            />
-                                            <small id="phoneHelp" class="form-text text-muted"
-                                                >請輸入10位數字的電話號碼，例：0912345678。</small
-                                            >
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="new_password" class="form-label">密碼</label>
-                                            <input
-                                                type="password"
-                                                class="form-control"
-                                                id="new_password"
-                                                name="new_password"
-                                                required
-                                            />
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary">註冊</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 取得帳號 -->
-                    <div id="DatabaseContent" class="hidden">
-                        <div class="subheading mb-3" id="skill_title">MySQL</div>
-                        <form id="get_user_info" action="/get_info" method="get">
-                            <div class="mb-3">
-                                <label for="account" class="form-label">帳號</label>
-                                <input type="text" class="form-control" id="account" name="account" required />
-                            </div>
-                            <div class="mb-3">
-                                <label for="password" class="form-label">密碼</label>
-                                <input type="password" class="form-control" id="password" name="password" required />
-                            </div>
-                            <button type="submit" class="btn btn-primary" id="confirm_btn">確認</button>
-                        </form>
-                        <button
-                            type="button"
-                            class="btn btn-primary"
-                            data-toggle="modal"
-                            data-target="#exampleModal"
-                            id="register_btn"
-                        >
-                            註冊
-                        </button>
                     </div>
 
                     <!-- CSS -->
                     <div id="css3Content" class="hidden">
                         <div class="subheading mb-3" id="skill_title">CSS 3</div>
+                        <div id="subtitle">嘗試修改 CSS 樣式</div>
                         <div class="dropdown-container">
                             <select id="colorSelector" class="custom-select">
                                 <option value="blue">藍色</option>
@@ -378,12 +271,132 @@
                     <!-- Java Script -->
                     <div id="JavaScriptContent" class="hidden">
                         <div class="subheading mb-3" id="skill_title">Java Script</div>
+                        <div id="subtitle">玩點小遊戲吧</div>
                         <canvas id="snakeCanvas" width="400" height="400"></canvas>
                         <button id="startButton" class="btn btn-primary">開始遊戲</button>
                     </div>
 
+                    <!-- Node JS -->
+                    <div id="Node.jsContent" class="hidden">
+                        <div class="subheading mb-3" id="skill_title">Node.js</div>
+                        <div id="subtitle">發送訊息讓伺服器回應你</div>
+                        <form id="myForm" action="/process" method="post">
+                            <label for="userInput">請輸入您的文字：</label>
+                            <input type="text" id="userInput" name="userInput" />
+                            <button type="submit" class="btn btn-primary">提交</button>
+                        </form>
+                        <div id="response1">服務器響應將顯示在這裡</div>
+                    </div>
+
+                    <!-- MySQL -->
+
+                    <!-- 取得帳號 -->
+                    <div id="DatabaseContent" class="hidden">
+                        <div class="subheading mb-3" id="skill_title">MySQL</div>
+                        <div id="subtitle">查看你的帳號</div>
+                        <form id="get_user_info" action="/get_info" method="get">
+                            <div class="mb-3">
+                                <label for="account" class="form-label">帳號</label>
+                                <input type="text" class="form-control" id="account" name="account" required />
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">密碼</label>
+                                <input type="password" class="form-control" id="password" name="password" required />
+                            </div>
+                            <button type="submit" class="btn btn-primary" id="confirm_btn">確認</button>
+                        </form>
+                        <button
+                            type="button"
+                            class="btn btn-primary"
+                            data-toggle="modal"
+                            data-target="#exampleModal"
+                            id="register_btn"
+                        >
+                            註冊
+                        </button>
+                    </div>
+
+                    <!-- 註冊 -->
+                    <div
+                        class="modal fade"
+                        id="exampleModal"
+                        tabindex="-1"
+                        role="dialog"
+                        aria-labelledby="exampleModalLabel"
+                        aria-hidden="true"
+                    >
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">註冊</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <!-- 在表單中使用一致的名稱 -->
+                                <form id="register" action="/user_register" method="post">
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <label for="new_account" class="form-label">帳號</label>
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                id="new_account"
+                                                name="new_account"
+                                                required
+                                                placeholder="What do you call a deer with no eye?"
+                                            />
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="new_name" class="form-label">名字</label>
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                id="new_name"
+                                                name="new_name"
+                                                required
+                                                placeholder="不知道"
+                                            />
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="new_phone" class="form-label">電話</label>
+                                            <input
+                                                type="tel"
+                                                class="form-control"
+                                                id="new_phone"
+                                                name="new_phone"
+                                                pattern="[0-9]{10}"
+                                                title="請輸入有效的10位數字電話號碼"
+                                                required
+                                                placeholder="0912345678"
+                                            />
+                                            <small id="phoneHelp" class="form-text text-muted"
+                                                >請輸入10位數字的電話號碼，例：0912345678。</small
+                                            >
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="new_password" class="form-label">密碼</label>
+                                            <input
+                                                type="password"
+                                                class="form-control"
+                                                id="new_password"
+                                                name="new_password"
+                                                required
+                                                placeholder="What do you call a bee from America?"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary">註冊</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
                     <br />
 
+                    <!-- 其他 -->
                     <div class="subheading mb-3">other</div>
                     <ul class="fa-ul mb-0">
                         <li>
@@ -406,9 +419,55 @@
                 </div>
             </section>
 
+            <section class="resume-section" id="tool">
+                <div class="resume-section-content">
+                    <h2 class="mb-5" style="margin-top: 30px">小工具</h2>
+                    <div class="subheading mb-3">Tools</div>
+                    <div id="subtitle">點選圖標看更多</div>
+                    <ul class="list-inline dev-icons">
+                        <li class="list-inline-item" onclick="showContent('qrcode')">
+                            <i class="fa-solid fa-qrcode"></i>
+                        </li>
+                        <li class="list-inline-item" onclick="showContent('idcard')">
+                            <i class="fa-regular fa-id-card"></i>
+                        </li>
+                    </ul>
+
+                    <div id="qrcodeContent" class="hidden">
+                        <div class="subheading mb-3" id="skill_title">Qrcode</div>
+                        <div id="subtitle">快速產生 QRcode</div>
+                        <div class="input-button-container">
+                            <input type="text" id="urlInput" placeholder="輸入網址" />
+                            <button id="generateButton">產生 QRcode</button>
+                        </div>
+                        <div id="qrcode"></div>
+                    </div>
+
+                    <div id="idcardContent" class="hidden">
+                        <div class="subheading mb-3" id="skill_title">身分證字號產生器</div>
+                        <div id="subtitle">快速產生身分證字號</div>
+
+                        <div class="gender-container">
+                            <!-- 選擇性別 -->
+                            <label for="gender">選擇性別：</label>
+                            <select id="gender">
+                                <option value="male">男生</option>
+                                <option value="female">女生</option>
+                            </select>
+
+                            <!-- 產生身分證字號的按鈕 -->
+                            <button id="generateIdCardButton">產生身分證字號</button>
+                        </div>
+
+                        <!-- 顯示身分證字號 -->
+                        <div id="idcard"></div>
+                    </div>
+                </div>
+            </section>
+
             <hr class="m-0" />
 
-            <!-- Interests-->
+            <!-- 個人興趣-->
             <section class="resume-section" id="interests">
                 <div class="resume-section-content">
                     <h2 class="mb-5">個人興趣</h2>
@@ -422,7 +481,8 @@
             </section>
 
             <hr class="m-0" />
-            <!-- project-->
+
+            <!-- 開發經驗-->
             <section class="resume-section" id="project">
                 <div class="resume-section-content">
                     <h2 class="mb-5">專案 & 開發經驗</h2>
@@ -451,10 +511,14 @@
                 </div>
             </section>
 
+            <!-- back to top button -->
             <button id="backToTopButton" class="btn btn-primary rounded-circle">
                 <i class="fa-solid fa-arrow-up" style="color: #ffffff"></i>
             </button>
         </div>
+
+        <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->

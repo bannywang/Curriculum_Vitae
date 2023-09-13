@@ -12,7 +12,7 @@ async function get_main_html(req, res) {
 // 前端傳回文字加以處理回傳
 async function handle_nodejs_post_request(req, res) {
     const userInput = req.body.userInput
-    const processedData = `後端伺服器：您輸入的文字是：${userInput}`
+    const processedData = `伺服器：您輸入的文字是：${userInput}`
 
     console.log(processedData)
 
