@@ -1,0 +1,12 @@
+<% if (result) { %>
+    <h1>獲取成功</h1>
+    <p>帳號: <%= result.account %></p>
+    <p>姓名: <%= result.name %></p>
+    <p>電話: <%= result.phone %></p>
+    <p>建立時間: <%= result.create_time %></p>
+    <a href="/#skills">返回首頁</a>
+<% } else { %>
+    <h1>獲取失敗</h1>
+    <p>未找到對應的帳號，請提供正確的帳號或密碼。</p>
+    <a href="/#skills">返回首頁</a>
+<% } %>

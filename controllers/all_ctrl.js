@@ -1,19 +1,18 @@
 const path = require('path')
 const model = require('../models/model')
 
-// 取得主頁
 async function get_main_html(req, res) {
-    // 獲取 index.html 的路徑，使用 'path' 模塊的 'join' 方法
-    const indexPath = path.join(process.cwd(), 'index.html')
-
-    // 使用 'res.sendFile' 方法將 index.html 發送到客戶端
-    res.sendFile(indexPath)
+    // 渲染名為 'ejs-example' 的 EJS 模板，並傳遞動態數據
+    res.render('index', {
+        pageTitle: '王瀚邑的個人履歷',
+        username: '王瀚邑',
+    })
 }
 
 // 前端傳回文字加以處理回傳
 async function handle_nodejs_post_request(req, res) {
     const userInput = req.body.userInput
-    const processedData = `後端伺服器：您輸入的文字是：${userInput}`
+    const processedData = `伺服器：您輸入的文字是：${userInput}`
 
     console.log(processedData)
 
@@ -30,83 +29,26 @@ async function perform_registration(req, res) {
         const password = req.body.new_password
 
         const registrationResult = await model.register(account, name, phone, password)
-
-        if (registrationResult.success) {
-            res.send(`
-                <html>
-                <head>
-                    <title>註冊成功</title>
-                </head>
-                <body>
-                    <h1>註冊成功</h1>
-                    <p>恭喜 ${registrationResult.name} 成功註冊！</p>
-                    <!-- 这里可以放一些其他内容或链接 -->
-                </body>
-                </html>
-            `)
-        } else {
-            // 注册失败，返回包含错误提示的HTML页面
-            res.send(`
-                <html>
-                <head>
-                    <title>註冊失敗</title>
-                </head>
-                <body>
-                    <h1>註冊失敗</h1>
-                    <p>${registrationResult.message}</p>
-                    <!-- 这里可以放一些其他内容或链接 -->
-                </body>
-                </html>
-            `)
-        }
+        // 渲染 register.ejs 並傳遞 registrationResult 變數
+        res.render('register', { registrationResult })
     } catch (error) {
+        // 處理錯誤
         console.error('HTTP请求处理失败：', error)
-        res.status(500).send(`
-            <html>
-            <head>
-                <title>伺服器錯誤</title>
-            </head>
-            <body>
-                <h1>伺服器錯誤</h1>
-                <p>很抱歉，伺服器發生錯誤。</p>
-                <!-- 这里可以放一些其他内容或链接 -->
-            </body>
-            </html>
-        `)
+        res.status(500).send('伺服器錯誤')
     }
 }
 
 // 取得用戶資訊
 async function get_info(req, res) {
     try {
-        const account = req.query.account
-        const password = req.query.password
+        const account = req.query.account // 使用者帳號
+        const password = req.query.password // 使用者密碼
 
-        let result = await model.get_user_info(account, password)
-        if (result) {
-            const userDataHTML = `
-                <html>
-                <head>
-                    <title>用戶資料</title>
-                </head>
-                <body>
-                    <h1>用戶資料</h1>
-                    <p>ID: ${result.id}</p>
-                    <p>帳號: ${result.account}</p>
-                    <p>姓名: ${result.name}</p>
-                    <p>電話: ${result.phone}</p>
-                    <p>建立時間: ${result.create_time}</p>
-                </body>
-                </html>
-            `
-            res.send(userDataHTML)
-        } else {
-            console.error('ctrl：帳號或密碼不正確')
-            res.status(500).json({ error: '查無帳號，請提供正確的帳號密碼' }) // 返回錯誤消息
-        }
+        let result = await model.get_user_info(account, password) // 獲取使用者資訊
+        res.render('get_info', { result })
     } catch (error) {
-        console.error('ctrl:註冊時發生錯誤：', error)
-        res.status(500).json({ error: '伺服器錯誤，請稍後再試。' }) // 返回錯誤消息
+        console.error('ctrl:獲取使用者信息時發生錯誤：', error)
+        res.status(500).json({ error: '伺服器錯誤，請稍後再試。' }) // 返回錯誤訊息
     }
 }
 

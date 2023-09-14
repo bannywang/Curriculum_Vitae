@@ -11253,6 +11253,12 @@ textarea:hover {
     display: none;
 }
 
+.fade-in {
+    opacity: 0; 
+    transition: opacity 0.5s ease-in;
+}
+
+
 /* 自定义下拉框样式 */
 .dropdown-container {
     position: relative;
@@ -11324,12 +11330,12 @@ button {
 }
 
 #startButton {
-    color: #fff; /* 文本颜色 */
-    padding: 10px 20px; /* 内边距 */
-    font-size: 16px; /* 字体大小 */
-    border: none; /* 移除边框 */
-    cursor: pointer; /* 鼠标悬停样式 */
-    transition: background-color 0.3s ease; /* 平滑的背景色过渡 */
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
     margin-bottom: 50px;
 }
 
@@ -11337,9 +11343,59 @@ button {
     background-color: #45a049; /* 按钮悬停时的背景色 */
 }
 
+.virtual-button {
+    font-size: 24px;
+    padding: 5px 10px;
+    margin: 5px;
+}
+
 #confirm_btn {
     margin-left: 0px;
 }
 #register_btn {
     margin-left: 65px;
+}
+
+#skill_title {
+    color: #bd5d38;
+}
+
+.active {
+    background-color: #CDA892;
+    transition: background-color 0.5s ease;
+    color: #ffffff;
+}
+
+#subtitle {
+    margin-top: -8px;
+    margin-bottom: 12px
+}
+
+#myForm {
+    margin-top: -10px;
+}
+
+
+#generateButton {
+    margin-left: -2px;
+}
+
+#qrcode {
+    transition: opacity 0.3s ease-in-out;
+    opacity: 0;
+}
+
+.input-button-container {
+    display: flex;
+    align-items: center; /* 垂直置中 */
+}
+
+#urlInput {
+    flex-grow: 1; /* 讓輸入框自動填滿剩餘空間 */
+    margin-right: 10px; /* 增加右邊的間距 */
+}
+
+
+#generateIdCardButton {
+    margin-left: -2px;
 }

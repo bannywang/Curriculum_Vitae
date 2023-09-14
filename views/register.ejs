@@ -1,0 +1,11 @@
+<% if (registrationResult.success) { %>
+    <h1>註冊成功</h1>
+    <p>恭喜 <%= registrationResult.name %> 註冊成功！</p>
+    <a href="/#skills">返回首頁</a>
+
+<% } else { %>
+    <h1>註冊失敗</h1>
+    <p><%= registrationResult.message %></p>
+    <a href="/#skills">返回首頁</a>
+
+<% } %>
