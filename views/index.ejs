@@ -431,6 +431,9 @@
                         <li class="list-inline-item" onclick="showContent('idcard')">
                             <i class="fa-regular fa-id-card"></i>
                         </li>
+                        <li class="list-inline-item" onclick="showContent('map')">
+                            <i class="fa-solid fa-map-location-dot"></i>
+                        </li>
                     </ul>
 
                     <div id="qrcodeContent" class="hidden">
@@ -461,6 +464,12 @@
 
                         <!-- 顯示身分證字號 -->
                         <div id="idcard"></div>
+                    </div>
+
+                    <div id="mapContent" class="hidden">
+                        <div class="subheading mb-3" id="skill_title">Map</div>
+                        <div id="subtitle">取得自己位置</div>
+                        <div id="mapContainer"></div>
                     </div>
                 </div>
             </section>

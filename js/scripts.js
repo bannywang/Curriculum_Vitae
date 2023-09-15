@@ -49,71 +49,90 @@ backToTopButton.addEventListener('click', function () {
 
 //! HTML5 ----------------------------------------------------------------
 
+// 取得HTML輸入框元素
 const htmlInput = document.getElementById('htmlInput')
+
+// 取得字符計數元素
 const charCount = document.getElementById('charCount')
+
+// 取得預覽按鈕元素
 const previewButton = document.getElementById('previewButton')
+
+// 最大字符數限制
 const maxChars = 50
 
-// 当用户输入时触发
+// 當使用者輸入時觸發
 htmlInput.addEventListener('input', function () {
+    // 取得輸入的文字
     const inputText = htmlInput.value
+
+    // 計算剩餘字符數
     const remainingChars = maxChars - inputText.length
 
-    // 更新字符数显示
+    // 更新字符數顯示
     charCount.textContent = `剩餘字數：${remainingChars}`
 
-    // 如果字符数超过最大限制，截断输入
+    // 如果字符數超過最大限制，截斷輸入
     if (remainingChars < 0) {
         htmlInput.value = inputText.slice(0, maxChars)
         charCount.textContent = `剩餘字數：0`
     }
 })
 
-// 当用户点击"预览"按钮时触发
+// 當使用者點擊"預覽"按鈕時觸發
 previewButton.addEventListener('click', function () {
-    // 获取用户输入的HTML代码
+    // 獲取使用者輸入的HTML代碼
     const htmlCode = htmlInput.value
 
-    // 使用alert显示用户输入的文字
+    // 使用alert顯示使用者輸入的文字
     alert(htmlCode)
 
-    // 清空输入框的值
+    // 清空輸入框的值
     htmlInput.value = ''
     charCount.textContent = `剩餘字數：${maxChars}`
 })
 
 //! CSS ----------------------------------------------------------------
+// 取得顏色選擇元素
 const colorSelector = document.getElementById('colorSelector')
+
+// 取得字重選擇元素
 const fontWeightSelector = document.getElementById('fontWeightSelector')
+
+// 取得字體大小選擇元素
 const fontSizeSelector = document.getElementById('fontSizeSelector')
+
+// 取得字體選擇元素
 const fontFamilySelector = document.getElementById('fontFamilySelector')
+
+// 取得可編輯的文字元素
 const editableText = document.getElementById('editableText')
 
-// 添加事件监听器以根据用户选择更新文本颜色
+// 添加事件監聽器以根據使用者選擇更新文字顏色
 colorSelector.addEventListener('change', function () {
     const selectedColor = colorSelector.value
     editableText.style.color = selectedColor
 })
 
-// 添加事件监听器以根据用户选择更新文本粗细
+// 添加事件監聽器以根據使用者選擇更新文字粗細
 fontWeightSelector.addEventListener('change', function () {
     const selectedFontWeight = fontWeightSelector.value
     editableText.style.fontWeight = selectedFontWeight
 })
 
-// 添加事件监听器以根据用户选择更新字体大小
+// 添加事件監聽器以根據使用者選擇更新字體大小
 fontSizeSelector.addEventListener('change', function () {
     const selectedFontSize = fontSizeSelector.value
     editableText.style.fontSize = selectedFontSize
 })
 
-// 添加事件监听器以根据用户选择更新字体
+// 添加事件監聽器以根據使用者選擇更新字體
 fontFamilySelector.addEventListener('change', function () {
     const selectedFontFamily = fontFamilySelector.value
     editableText.style.fontFamily = selectedFontFamily
 })
 
-// 将文本转换为大写
+// 添加事件監聽器以將文字轉換為大寫
 textTransformSelector.addEventListener('change', function () {
     const selectedTextTransform = textTransformSelector.value
     editableText.style.textTransform = selectedTextTransform
@@ -331,10 +350,13 @@ document.getElementById('myForm').addEventListener('submit', function (event) {
 
 // Qrcode ----------------------------------------------------------------
 
+// 取得長網址輸入框元素
 const urlInput = document.getElementById('urlInput')
+
+// 取得生成按鈕元素
 const generateButton = document.getElementById('generateButton')
 
-// 獲取用於顯示 QR 碼的容器元素
+// 取得用於顯示 QR 碼的容器元素
 const qrcodeContainer = document.getElementById('qrcode')
 
 // 添加按鈕點擊事件監聽器
@@ -368,35 +390,63 @@ generateButton.addEventListener('click', function () {
 })
 
 // idcode ----------------------------------------------------------------
+
+// 取得元素
 const genderSelect = document.getElementById('gender')
 const generateIdCardButton = document.getElementById('generateIdCardButton')
 const idcardContainer = document.getElementById('idcard')
 
-generateIdCardButton.addEventListener('click', function () {
+// 為按鈕添加點擊事件監聽器
+generateIdCardButton.addEventListener('click', generateAndDisplayIdCard)
+
+// 生成並顯示身分證號碼
+function generateAndDisplayIdCard() {
     const gender = genderSelect.value
     const idcard = generateIdCard(gender)
     idcardContainer.textContent = idcard
-})
-
-function generateIdCard(gender) {
-    const firstLetter = String.fromCharCode(65 + Math.floor(Math.random() * 26)) // 隨機選擇 A 到 Z 中的一個字母
-
-    let secondDigit
-    if (gender === 'male') {
-        secondDigit = '1' // 男生的第二碼是 1
-    } else if (gender === 'female') {
-        secondDigit = '2' // 女生的第二碼是 2
-    }
-
-    const restDigits = generateRandomDigits(8) // 生成 8 位隨機數字
-
-    return firstLetter + secondDigit + restDigits
 }
 
+// 生成身分證號碼的函數，根據性別生成
+function generateIdCard(gender) {
+    const firstLetter = String.fromCharCode(65 + Math.floor(Math.random() * 26))
+    const secondDigit = gender === 'male' ? '1' : '2'
+    const restDigits = generateRandomDigits(8)
+    return `${firstLetter}${secondDigit}${restDigits}`
+}
+
+// 生成指定長度的隨機數字序列的函數
 function generateRandomDigits(length) {
     let result = ''
     for (let i = 0; i < length; i++) {
         result += Math.floor(Math.random() * 10) // 隨機生成 0 到 9 的數字
     }
     return result
+}
+
+// 取得位置 ----------------------------------------------------------------
+
+const mapContainer = document.getElementById('mapContainer')
+
+if ('geolocation' in navigator) {
+    navigator.geolocation.getCurrentPosition(
+        function (position) {
+            // 獲取使用者的緯度和經度
+            const userLatitude = position.coords.latitude
+            const userLongitude = position.coords.longitude
+
+            // 使用獲取的緯度和經度設置 Google 地圖的嵌入代碼
+            mapContainer.innerHTML = `<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d920.7170234107717!2d${userLongitude}!3d${userLatitude}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346e0531ad643843%3A0xd0fd27c265a26e65!2z5Z2C5ZKM5LyB5qWt5pyJ6ZmQ5YWs5YWs5Y-4LeS6lOemj-iHquW8tw!5e0!3m2!1szh-TW!2stw!4v1694757019636!5m2!1szh-TW!2stw" width="100%" height="450" style="border: 0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`
+        },
+        function (error) {
+            // 如果使用者不允許存取位置或瀏覽器不支持 Geolocation API，顯示台北 101 的位置
+            const taipei101Latitude = 25.03414626533686
+            const taipei101Longitude = 121.56432933007659
+            mapContainer.innerHTML = `<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5777.999716463514!2d${taipei101Longitude}!3d${taipei101Latitude}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442ab3ea249d14f%3A0x4222a96b127f7b88!2z5aSn5a-M6IqX5qmf5oql6Kqg5YyX5LiK5q2j6Lev6JiZ55-l!5e0!3m2!1szh-TW!2stw!4v1694757019636!5m2!1szh-TW!2stw" width="100%" height="450" style="border: 0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`
+        }
+    )
+} else {
+    // 如果瀏覽器不支持 Geolocation API，顯示台北 101 的位置
+    const taipei101Latitude = 25.03414626533686
+    const taipei101Longitude = 121.56432933007659
+    mapContainer.innerHTML = `<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5777.999716463514!2d${taipei101Longitude}!3d${taipei101Latitude}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442ab3ea249d14f%3A0x4222a96b127f7b88!2z5aSn5a-M6IqX5qmf5oql6Kqg5YyX5LiK5q2j6Lev6JiZ55-l!5e0!3m2!1szh-TW!2stw!4v1694757019636!5m2!1szh-TW!2stw" width="100%" height="450" style="border: 0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`
 }

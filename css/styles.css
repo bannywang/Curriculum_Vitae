@@ -11254,10 +11254,9 @@ textarea:hover {
 }
 
 .fade-in {
-    opacity: 0; 
+    opacity: 0;
     transition: opacity 0.5s ease-in;
 }
-
 
 /* 自定义下拉框样式 */
 .dropdown-container {
@@ -11361,20 +11360,19 @@ button {
 }
 
 .active {
-    background-color: #CDA892;
+    background-color: #cda892;
     transition: background-color 0.5s ease;
     color: #ffffff;
 }
 
 #subtitle {
     margin-top: -8px;
-    margin-bottom: 12px
+    margin-bottom: 12px;
 }
 
 #myForm {
     margin-top: -10px;
 }
-
 
 #generateButton {
     margin-left: -2px;
@@ -11395,7 +11393,18 @@ button {
     margin-right: 10px; /* 增加右邊的間距 */
 }
 
-
 #generateIdCardButton {
     margin-left: -2px;
+}
+
+/* 基本樣式，設置地圖的最小高度 */
+#map {
+    min-height: 300px;
+}
+
+/* 媒體查詢：在小螢幕上調整地圖高度 */
+@media (max-width: 768px) {
+    #map {
+        min-height: 200px;
+    }
 }
