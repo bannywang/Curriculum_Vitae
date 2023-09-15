@@ -303,8 +303,10 @@
                                 <label for="password" class="form-label">密碼</label>
                                 <input type="password" class="form-control" id="password" name="password" required />
                             </div>
+                            <div id="get_info_results"></div>
                             <button type="submit" class="btn btn-primary" id="confirm_btn">確認</button>
                         </form>
+
                         <button
                             type="button"
                             class="btn btn-primary"
@@ -314,6 +316,16 @@
                         >
                             註冊
                         </button>
+
+                        <!-- <button
+                            type="button"
+                            class="btn btn-primary"
+                            data-toggle="modal"
+                            data-target="#userInfoModal"
+                            id="update_btn"
+                        >
+                            修改帳號密碼
+                        </button> -->
                     </div>
 
                     <!-- 註冊 -->
@@ -333,7 +345,6 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <!-- 在表單中使用一致的名稱 -->
                                 <form id="register" action="/user_register" method="post">
                                     <div class="modal-body">
                                         <div class="mb-3">
@@ -393,6 +404,35 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- 修改 -->
+                    <!-- <div
+                        class="modal fade"
+                        id="userInfoModal"
+                        tabindex="-1"
+                        role="dialog"
+                        aria-labelledby="userInfoModalLabel"
+                        aria-hidden="true"
+                    >
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="userInfoModalLabel">用戶資訊</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>名稱: <span id="userName"></span> <button id="editNameBtn">編輯</button></p>
+                                    <p>電話: <span id="userPhone"></span> <button id="editPhoneBtn">編輯</button></p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                                    <button type="button" class="btn btn-primary" id="saveChangesBtn">保存更改</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
 
                     <br />
 

@@ -11314,6 +11314,10 @@ button {
     margin-top: -85px;
     margin-left: 77px;
 }
+#update_btn {
+    margin-top: -85px;
+    margin-left: -7px;
+}
 
 #JavaScriptContent {
     display: flex;

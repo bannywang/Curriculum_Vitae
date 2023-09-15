@@ -450,3 +450,119 @@ if ('geolocation' in navigator) {
     const taipei101Longitude = 121.56432933007659
     mapContainer.innerHTML = `<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5777.999716463514!2d${taipei101Longitude}!3d${taipei101Latitude}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442ab3ea249d14f%3A0x4222a96b127f7b88!2z5aSn5a-M6IqX5qmf5oql6Kqg5YyX5LiK5q2j6Lev6JiZ55-l!5e0!3m2!1szh-TW!2stw!4v1694757019636!5m2!1szh-TW!2stw" width="100%" height="450" style="border: 0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`
 }
+
+// 取得帳號 ----------------------------------------------------------------
+
+// 獲取表單元素和消息元素
+const get_info_form = document.getElementById('get_user_info')
+const infoMessageElement = document.getElementById('get_info_results')
+
+// 在頁面加載時設置 infoMessage
+let infoMessage = '' // 設定一個默認值
+if (infoMessage) {
+    infoMessageElement.innerHTML = infoMessage
+}
+
+// 在表單提交時觸發
+get_info_form.addEventListener('submit', async (e) => {
+    e.preventDefault()
+
+    // 獲取用戶輸入的帳號和密碼
+    const account = document.getElementById('account').value
+    const password = document.getElementById('password').value
+
+    // 發送 GET 請求到伺服器
+    const response = await fetch(`/get_info?account=${account}&password=${password}`)
+
+    if (response.ok) {
+        // 如果請求成功，解析 JSON 響應
+        const data = await response.json()
+
+        if (data.result) {
+            // 如果取得成功，顯示用戶數據
+            const userData = data.result // 你需要根據實際數據結構來訪問用戶數據
+            // 在這裡渲染用戶數據，例如：
+            const user_id = userData.id
+            const user_account = userData.account
+            const user_name = userData.name
+            const user_phone = userData.phone
+            const user_create_time = userData.create_time
+
+            infoMessageElement.innerHTML = `
+                <div class="user-info">
+                    <p>名稱: ${user_name}</p>
+                    <p>帳號: ${user_account}</p>
+                    <p>電話: ${user_phone}</p>
+                    <p>帳號建立時間: ${user_create_time}</p>
+                </div>
+            `
+        } else {
+            // 如果取得失敗，顯示錯誤消息
+            infoMessage = '取得失敗'
+            infoMessageElement.innerHTML = `<p class="error-message">${infoMessage}</p>`
+        }
+
+        // 在這裡可以執行其他成功時的操作
+    } else {
+        // 處理請求錯誤
+        infoMessage = '請求失敗，請稍後再試。'
+        infoMessageElement.innerHTML = `<p class="error-message">${infoMessage}</p>`
+    }
+})
+
+// 註冊 ----------------------------------------------------------------
+
+const get_register_form = document.getElementById('register')
+
+// 在表單提交時觸發
+get_register_form.addEventListener('submit', async (e) => {
+    e.preventDefault()
+
+    // 獲取用戶輸入的帳號、名字、電話和密碼
+    const account = document.getElementById('new_account').value
+    const name = document.getElementById('new_name').value
+    const phone = document.getElementById('new_phone').value
+    const password = document.getElementById('new_password').value
+
+    // 發送 POST 請求到伺服器
+    const response = await fetch('/user_register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            new_account: account,
+            new_name: name,
+            new_phone: phone,
+            new_password: password,
+        }),
+    })
+
+    if (response.ok) {
+        // 解析 JSON 響應
+        const data = await response.json()
+
+        if (data.success) {
+            // 如果註冊成功，顯示成功警告
+            const username = data.name || '用戶' // 使用返回的用戶名，如果沒有，使用默認名稱
+            alert(`恭喜 ${username} 註冊成功`)
+            
+
+            // 清空帳號、電話、名字和密碼欄位
+            document.getElementById('new_account').value = ''
+            document.getElementById('new_phone').value = ''
+            document.getElementById('new_name').value = ''
+            document.getElementById('new_password').value = ''
+        } else {
+            // 如果註冊失敗，顯示錯誤消息
+            alert(data.message || '註冊失敗')
+        }
+
+        // 在這裡可以執行其他成功時的操作
+    } else {
+        // 處理請求錯誤
+        alert('帳號或名字已重複，請嘗試更換')
+        document.getElementById('new_account').value = ''
+        document.getElementById('new_name').value = ''
+    }
+})

@@ -77,6 +77,11 @@ async function register(account, name, phone, password) {
     }
 }
 
+// update user info
+// async function update_user_info(account, name, phone, password) {
+
+// }
+
 module.exports = {
     get_all_user_info,
     get_user_info,

@@ -24,17 +24,22 @@ async function handle_nodejs_post_request(req, res) {
 async function perform_registration(req, res) {
     try {
         const account = req.body.new_account
-        const name = req.body.new_name
+        const name = req.body.new_name  
         const phone = req.body.new_phone
         const password = req.body.new_password
 
         const registrationResult = await model.register(account, name, phone, password)
-        // 渲染 register.ejs 並傳遞 registrationResult 變數
-        res.render('register', { registrationResult })
+
+        // 如果註冊成功，返回 JSON 響應
+        if (registrationResult.success) {
+            return res.json({ success: true, message: '註冊成功', name: registrationResult.name })
+        } else {
+            return res.status(400).json({ success: false, message: registrationResult.message || '註冊失敗' })
+        }
     } catch (error) {
         // 處理錯誤
-        console.error('HTTP请求处理失败：', error)
-        res.status(500).send('伺服器錯誤')
+        console.error('HTTP請求處理失敗：', error)
+        res.status(500).json({ success: false, message: '伺服器錯誤' })
     }
 }
 
@@ -45,7 +50,10 @@ async function get_info(req, res) {
         const password = req.query.password // 使用者密碼
 
         let result = await model.get_user_info(account, password) // 獲取使用者資訊
-        res.render('get_info', { result })
+        let infoMessage = result ? '取得成功' : '取得失敗' // 根據 result 的值設定 infoMessage
+
+        // 將結果封裝為一個 JSON 物件並發送給客戶端
+        res.json({ result, infoMessage })
     } catch (error) {
         console.error('ctrl:獲取使用者信息時發生錯誤：', error)
         res.status(500).json({ error: '伺服器錯誤，請稍後再試。' }) // 返回錯誤訊息
