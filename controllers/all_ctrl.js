@@ -1,11 +1,19 @@
-const path = require('path')
 const model = require('../models/model')
+const { jwtMiddleware, createToken } = require('../middlewares/jwtMiddleware')
 
-async function get_main_html(req, res) {
+// 主頁
+async function get_index_ejs(req, res) {
     // 渲染名為 'ejs-example' 的 EJS 模板，並傳遞動態數據
     res.render('index', {
         pageTitle: '王瀚邑的個人履歷',
         username: '王瀚邑',
+    })
+}
+
+// 個人更多頁
+async function get_main_ejs(req, res) {
+    res.render('main', {
+        pageTitle: '詳細資訊',
     })
 }
 
@@ -20,15 +28,21 @@ async function handle_nodejs_post_request(req, res) {
     res.json({ message: processedData })
 }
 
+// 取得登入頁面
+async function get_login_page(req, res) {
+    res.render('login_page', {
+        pageTitle: '登入頁面',
+    })
+}
+
 // 註冊
 async function perform_registration(req, res) {
     try {
-        const account = req.body.new_account
-        const name = req.body.new_name  
-        const phone = req.body.new_phone
+        const name = req.body.new_name
+        const mail = req.body.new_email
         const password = req.body.new_password
 
-        const registrationResult = await model.register(account, name, phone, password)
+        const registrationResult = await model.user_register(name, mail, password)
 
         // 如果註冊成功，返回 JSON 響應
         if (registrationResult.success) {
@@ -43,26 +57,42 @@ async function perform_registration(req, res) {
     }
 }
 
-// 取得用戶資訊
-async function get_info(req, res) {
+// 登入
+async function perform_login(req, res) {
     try {
-        const account = req.query.account // 使用者帳號
-        const password = req.query.password // 使用者密碼
+        const mail = req.body.new_email
+        const password = req.body.new_password
 
-        let result = await model.get_user_info(account, password) // 獲取使用者資訊
-        let infoMessage = result ? '取得成功' : '取得失敗' // 根據 result 的值設定 infoMessage
+        const login_result = await model.user_login(mail, password)
 
-        // 將結果封裝為一個 JSON 物件並發送給客戶端
-        res.json({ result, infoMessage })
+        if (login_result.success) {
+            // 驗證 JWT 令牌
+            jwtMiddleware(req, res, (err) => {
+                if (err) {
+                    // JWT 驗證失敗，返回錯誤消息或執行其他操作
+                    return res.redirect('/login_page')
+                }
+
+                // JWT 驗證成功，繼續處理請求
+                const token = createToken(login_result.user)
+                res.json({ success: true, token }) // 或者您可以根據需求返回其他用戶信息
+            })
+        } else {
+            // 登入失敗，返回錯誤消息
+            res.json({ success: false, message: login_result.message })
+        }
     } catch (error) {
-        console.error('ctrl:獲取使用者信息時發生錯誤：', error)
-        res.status(500).json({ error: '伺服器錯誤，請稍後再試。' }) // 返回錯誤訊息
+        // 處理錯誤
+        console.error('登入失敗：', error)
+        res.json({ success: false, message: '登入失敗' })
     }
 }
 
 module.exports = {
-    get_main_html,
+    get_index_ejs,
+    get_main_ejs,
     handle_nodejs_post_request,
+    get_login_page,
     perform_registration,
-    get_info,
+    perform_login,
 }

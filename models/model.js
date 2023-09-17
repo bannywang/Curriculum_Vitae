@@ -19,49 +19,68 @@ async function get_all_user_info() {
 }
 
 // 取得用戶資訊
-async function get_user_info(account, password) {
+async function get_user_info(mail, password) {
     try {
-        // 檢查帳號和密碼是否匹配
-        const query = 'SELECT * FROM user_info WHERE account = ? AND password = ?'
-        const values = [account, password]
+        // 查詢用戶資訊
+        const [users] = await connection.execute('SELECT * FROM user_info WHERE mail = ? AND password = ?', [
+            mail,
+            password,
+        ])
 
-        const [result] = await connection.query(query, values)
-
-        // 如果有匹配的記錄，返回用戶資訊
-        if (result.length > 0) {
-            const user_info = result[0]
-            user_info.create_time = format_date_time(user_info.create_time) // 格式化日期时间
-            console.log(user_info)
-            return user_info
+        if (users.length === 1) {
+            // 找到匹配的用戶資訊，返回用戶資料
+            const user = users[0]
+            // 在這裡可以選擇返回需要的用戶資訊字段
+            return { success: true, user: user }
         } else {
-            console.log('後端回：查無用戶')
-            return null // 找不到匹配的用戶
+            // 找不到匹配的用戶資訊
+            return { success: false, message: '電子郵件或密碼不正確' }
         }
     } catch (error) {
-        console.error('無法獲取用戶資料:', error)
-        throw error // 拋出錯誤，讓上層處理
+        // 處理錯誤
+        console.error('取得用戶資訊失敗：', error)
+        return { success: false, message: '取得用戶資訊失敗' }
+    }
+}
+
+async function use_id_get_user_info(user_id) {
+    try {
+        // 查詢用戶資訊
+        const [users] = await connection.execute('SELECT * FROM user_info WHERE user_id = ?', [user_id])
+
+        if (users.length === 1) {
+            // 找到匹配的用戶資訊，返回用戶資料
+            const user = users[0]
+            // 在這裡可以選擇返回需要的用戶資訊字段
+            return { success: true, user: user }
+        } else {
+            // 找不到匹配的用戶資訊
+            return { success: false, message: '用戶ID不存在' }
+        }
+    } catch (error) {
+        // 處理錯誤
+        console.error('根據用戶ID取得用戶資訊失敗：', error)
+        return { success: false, message: '根據用戶ID取得用戶資訊失敗' }
     }
 }
 
 // 註冊 (account,name不能重複)
-async function register(account, name, phone, password) {
+async function user_register(name, mail, password) {
     try {
-        // 檢查是否存在相同帳號或名字的用戶
-        const [existingUsers] = await connection.execute('SELECT * FROM user_info WHERE account = ? OR name = ?', [
-            account,
-            name,
-        ])
+        // 檢查是否存在相同的電子郵件
+        const [existingUsers] = await connection.execute('SELECT * FROM user_info WHERE mail = ?', [mail])
 
         if (existingUsers.length > 0) {
-            // 帳號或名字重複，註冊失敗
-            return { success: false, message: '帳號或名字已存在，註冊失敗' }
+            // 電子郵件已存在，註冊失敗
+            return { success: false, message: '電子郵件已存在，註冊失敗' }
         }
 
         // 在資料庫中插入新用戶的資訊
-        const [results] = await connection.execute(
-            'INSERT INTO user_info (account, name, phone, password) VALUES (?, ?, ?, ?)',
-            [account, name, phone, password]
-        )
+        const [results] = await connection.execute('INSERT INTO user_info (name, mail, password) VALUES (?, ?, ?)', [
+            name,
+            mail,
+            password,
+        ])
 
         if (results.affectedRows === 1) {
             // 註冊成功
@@ -77,13 +96,54 @@ async function register(account, name, phone, password) {
     }
 }
 
-// update user info
-// async function update_user_info(account, name, phone, password) {
+// 登入
+async function user_login(mail, password) {
+    try {
+        // 查詢用戶資訊
+        const [users] = await connection.execute('SELECT * FROM user_info WHERE mail = ? AND password = ?', [
+            mail,
+            password,
+        ])
 
-// }
+        if (users.length === 1) {
+            // 找到匹配的用戶資訊，設置login_statu為1表示登入成功
+            const user = users[0]
+            await connection.execute('UPDATE user_info SET login_statu = 1 WHERE user_id = ?', [user.user_id])
+            return { success: true, message: '登入成功', user: user }
+        } else {
+            // 找不到匹配的用戶資訊，登入失敗
+            return { success: false, message: '電子郵件或密碼不正確' }
+        }
+    } catch (error) {
+        // 處理錯誤
+        console.error('登入失敗：', error)
+        return { success: false, message: '登入失敗' }
+    }
+}
+
+// 登出
+async function user_logout(user_id) {
+    try {
+        // 在資料庫中將用戶的登入狀態 `login_statu` 設置為 0
+        const [results] = await connection.execute('UPDATE user_info SET login_statu = 0 WHERE user_id = ?', [user_id])
+
+        if (results.affectedRows === 1) {
+            return { success: true, message: '登出成功' }
+        } else {
+            return { success: false, message: '登出失敗，用戶不存在或已經登出' }
+        }
+    } catch (error) {
+        // 處理錯誤
+        console.error('登出失敗：', error)
+        return { success: false, message: '登出失敗' }
+    }
+}
 
 module.exports = {
     get_all_user_info,
     get_user_info,
-    register,
+    use_id_get_user_info,
+    user_register,
+    user_login,
+    user_logout,
 }
