@@ -22,35 +22,27 @@
     <body id="page-top">
         <div class="container" id="container">
             <div class="form-container sign-up-container">
-                <form action="#">
-                    <h1>創建帳戶</h1>
-                    <div class="social-container">
-                        <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                        <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                    <span>或使用您的電子郵件進行註冊</span>
-                    <input type="text" placeholder="姓名" />
-                    <input type="email" placeholder="電子郵件" />
-                    <input type="password" placeholder="密碼" />
-                    <button>註冊</button>
+                <form action="/user_register" method="POST">
+                    <h1>建立帳戶</h1>
+                    <hr />
+                    <input type="text" placeholder="姓名" name="new_name" />
+                    <input type="email" placeholder="電子郵件" name="new_email" />
+                    <input type="password" placeholder="密碼" name="new_password" />
+                    <button type="submit">註冊</button>
                 </form>
             </div>
             <div class="form-container sign-in-container">
-                <form action="#">
+                <form action="/user_login" id="loginForm" method="post">
                     <h1>登入</h1>
-                    <div class="social-container">
-                        <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                        <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                    <span>或使用您的帳戶</span>
-                    <input type="email" placeholder="電子郵件" />
-                    <input type="password" placeholder="密碼" />
-                    <a href="#">忘記密碼？</a>
-                    <button>登入</button>
+                    <hr />
+                    <input type="email" id="loginEmail" name="email" placeholder="電子郵件" />
+                    <input type="password" id="loginPassword" name="password" placeholder="密碼" />
+
+                    <!-- <a href="#">忘記密碼？</a> -->
+                    <button type="submit" id="loginButton">登入</button>
                 </form>
             </div>
+
             <div class="overlay-container">
                 <div class="overlay">
                     <div class="overlay-panel overlay-left">
@@ -67,12 +59,10 @@
             </div>
         </div>
         <script src="../js/login.js"></script>
-        <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
 
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
-        <script src="../js/scripts.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

@@ -1,16 +1,21 @@
 const express = require('express')
 const router = express.Router()
 const allCtrl = require('../controllers/all_ctrl')
-const jwtMiddleware = require('../middlewares/jwtMiddleware')
 
-// 處理 GET 請求
+// middleware  ----------------------------------------------------------------
+
+// 檢查是否為登入狀態
+const { check_login } = require('../middlewares/session_middleware')
+
+// GET ----------------------------------------------------------------
 router.get('/', allCtrl.get_index_ejs)
 router.get('/login_page', allCtrl.get_login_page)
+router.get('/main', check_login, allCtrl.get_main_ejs)
+router.get('/logout', allCtrl.perform_logout) //登出
 
-// 處理進入 /main 頁面的 GET 請求，使用 jwtMiddleware 進行登入驗證
-router.get('/main', jwtMiddleware, allCtrl.get_main_ejs)
-
+// POST ----------------------------------------------------------------
 router.post('/process', allCtrl.handle_nodejs_post_request)
-router.post('/user_register', allCtrl.perform_registration)
+router.post('/user_register', allCtrl.perform_registration) // 註冊
+router.post('/user_login', allCtrl.perform_login) // 登入
 
 module.exports = router

@@ -124,20 +124,40 @@ async function user_login(mail, password) {
 // 登出
 async function user_logout(user_id) {
     try {
-        // 在資料庫中將用戶的登入狀態 `login_statu` 設置為 0
+        // 在数据库中将用户的登录状态 `login_statu` 设置为 0
         const [results] = await connection.execute('UPDATE user_info SET login_statu = 0 WHERE user_id = ?', [user_id])
 
         if (results.affectedRows === 1) {
             return { success: true, message: '登出成功' }
         } else {
-            return { success: false, message: '登出失敗，用戶不存在或已經登出' }
+            return { success: false, message: '登出失败，用户不存在或已经登出' }
+        }
+    } catch (error) {
+        // 处理错误
+        console.error('登出失败：', error)
+        return { success: false, message: '登出失败' }
+    }
+}
+
+// 將所有使用者踢下線
+async function all_logout() {
+    try {
+        // 執行 SQL 更新查詢，將所有人的 login_statu 設置為 0
+        const [result] = await connection.execute('UPDATE user_info SET login_statu = 0')
+
+        // 檢查更新是否成功
+        if (result.affectedRows > 0) {
+            console.log('成功將所有人的 login_statu 設置為 0')
+        } else {
+            console.log('沒有更新任何記錄')
         }
     } catch (error) {
         // 處理錯誤
-        console.error('登出失敗：', error)
-        return { success: false, message: '登出失敗' }
+        console.error('更新 login_statu 失敗：', error)
     }
 }
+
+// all_logout()
 
 module.exports = {
     get_all_user_info,
