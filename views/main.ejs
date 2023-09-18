@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title><%= pageTitle %></title>
+        <!-- <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" /> -->
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link
+            href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700"
+            rel="stylesheet"
+            type="text/css"
+        />
+        <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="../css/styles.css" rel="stylesheet" />
+        <link rel="shortcut icon" href="../assets/img/me.ico" />
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+            <a class="navbar-brand js-scroll-trigger" href="#page-top">
+                <span class="d-none d-lg-block"
+                    ><img
+                        class="img-fluid img-profile rounded-circle mx-auto mb-2"
+                        src="../assets/img/banny.jpg"
+                        alt="王瀚邑"
+                /></span>
+            </a>
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarResponsive"
+                aria-controls="navbarResponsive"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#skills">技能</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#tool">小工具</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#interests">個人興趣</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#project">開發經驗</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/">回主頁</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/logout">登出</a></li>
+                </ul>
+            </div>
+        </nav>
+        <!-- Page Content-->
+        <div class="container-fluid p-0">
+            <!-- 技能-->
+            <section class="resume-section" id="skills">
+                <div class="resume-section-content">
+                    <h2 class="mb-5" style="margin-top: 50px">技能</h2>
+                    <div class="subheading mb-3">Programming Languages & Tools</div>
+                    <div id="subtitle">點選圖標看更多</div>
+                    <ul class="list-inline dev-icons">
+                        <li class="list-inline-item" onclick="showContent('html5')">
+                            <i class="fab fa-html5"></i>
+                        </li>
+                        <li class="list-inline-item" onclick="showContent('css3')">
+                            <i class="fab fa-css3-alt"></i>
+                        </li>
+
+                        <li class="list-inline-item" onclick="showContent('JavaScript')">
+                            <i class="fab fa-js-square"></i>
+                        </li>
+
+                        <li class="list-inline-item" onclick="showContent('Node.js')">
+                            <i class="fab fa-node-js"></i>
+                        </li>
+                        <li class="list-inline-item" onclick="showContent('Database')">
+                            <i class="fa-solid fa-database"></i>
+                        </li>
+                        <i class="fa-brands fa-figma"></i>
+                        <i class="fa-brands fa-github"></i>
+                    </ul>
+
+                    <!-- HTML 5 -->
+                    <div id="html5Content" class="hidden">
+                        <div class="subheading mb-3" id="skill_title">HTML 5</div>
+                        <div id="subtitle">輸入一些文字</div>
+                        <textarea id="htmlInput" rows="5" cols="50" placeholder="輸入一些文字..."></textarea>
+                        <div id="charCount">剩餘字數：50</div>
+                        <br />
+                        <button id="previewButton" class="btn btn-primary">預覽</button>
+                    </div>
+
+                    <!-- CSS -->
+                    <div id="css3Content" class="hidden">
+                        <div class="subheading mb-3" id="skill_title">CSS 3</div>
+                        <div id="subtitle">嘗試修改 CSS 樣式</div>
+                        <div class="dropdown-container">
+                            <select id="colorSelector" class="custom-select">
+                                <option value="blue">藍色</option>
+                                <option value="red">红色</option>
+                                <option value="green">綠色</option>
+                                <option value="black">黑色</option>
+                            </select>
+                        </div>
+
+                        <div class="dropdown-container">
+                            <select id="fontWeightSelector" class="custom-select">
+                                <option value="normal">正常</option>
+                                <option value="bold">粗體</option>
+                            </select>
+                        </div>
+
+                        <div class="dropdown-container">
+                            <select id="fontSizeSelector" class="custom-select">
+                                <option value="16px">16像素</option>
+                                <option value="20px">20像素</option>
+                                <option value="24px">24像素</option>
+                            </select>
+                        </div>
+
+                        <div class="dropdown-container">
+                            <select id="fontFamilySelector" class="custom-select">
+                                <option value="Arial, sans-serif">Arial</option>
+                                <option value="Georgia, serif">Georgia</option>
+                                <option value="Verdana, sans-serif">Verdana</option>
+                            </select>
+                        </div>
+
+                        <div class="dropdown-container">
+                            <select id="textTransformSelector" class="custom-select">
+                                <option value="none">正常</option>
+                                <option value="uppercase">全部大寫</option>
+                                <option value="lowercase">全部小寫</option>
+                                <option value="capitalize">首字母大寫</option>
+                            </select>
+                        </div>
+
+                        <div contenteditable="true" style="border: 1px solid #ccc; padding: 10px">
+                            <p
+                                id="editableText"
+                                style="
+                                    font-size: 18px;
+                                    color: blue;
+                                    text-align: center;
+                                    font-weight: normal;
+                                    text-transform: none;
+                                "
+                            >
+                                調整 CSS 樣式｜Adjust CSS Styles
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Java Script -->
+                    <div id="JavaScriptContent" class="hidden">
+                        <div class="subheading mb-3" id="skill_title">Java Script</div>
+                        <div id="subtitle">玩點小遊戲吧</div>
+                        <canvas id="snakeCanvas" width="400" height="400"></canvas>
+                        <button id="startButton" class="btn btn-primary">開始遊戲</button>
+                    </div>
+
+                    <!-- Node JS -->
+                    <div id="Node.jsContent" class="hidden">
+                        <div class="subheading mb-3" id="skill_title">Node.js</div>
+                        <div id="subtitle">發送訊息讓伺服器回應你</div>
+                        <form id="myForm" action="/process" method="post">
+                            <label for="userInput">請輸入您的文字：</label>
+                            <input type="text" id="userInput" name="userInput" />
+                            <button type="submit" class="btn btn-primary">提交</button>
+                        </form>
+                        <div id="response1">服務器響應將顯示在這裡</div>
+                    </div>
+
+                    <!-- MySQL -->
+
+                    <!-- 取得帳號 -->
+                    <div id="DatabaseContent" class="hidden">
+                        <div class="subheading mb-3" id="skill_title">MySQL</div>
+                        <div id="subtitle">查看帳號資訊</div>
+                        <% if (user) { %>
+                        <div class="user-info user-info-item">
+                            <span class="info-label">使用者名稱：</span>
+                            <span class="info-value"><%= user.name %></span>
+                        </div>
+                        <div class="user-info user-info-item">
+                            <span class="info-label">使用者電子郵件：</span>
+                            <span class="info-value"><%= user.mail %></span>
+                        </div>
+                        <div class="user-info user-info-item">
+                            <span class="info-label">帳號建立時間：</span>
+                            <span class="info-value"><%= userInfo.create_time %></span>
+                        </div>
+                        <!-- 在这里添加其他使用者資訊 -->
+                        <% } else { %>
+                        <p>使用者未登入</p>
+                        <% } %>
+
+                        <button
+                            type="button"
+                            class="btn btn-primary"
+                            data-toggle="modal"
+                            data-target="#exampleModalCenter"
+                            style="margin-left: 0px"
+                        >
+                            修改名稱或密碼
+                        </button>
+                    </div>
+
+                    <!-- Button trigger modal -->
+
+                    <!-- Modal -->
+                    <div
+                        class="modal fade"
+                        id="exampleModalCenter"
+                        tabindex="-1"
+                        role="dialog"
+                        aria-labelledby="exampleModalCenterTitle"
+                        aria-hidden="true"
+                    >
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalCenterTitle">修改名稱或密碼</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-header">
+                                    <small class="text-muted">您可以單獨修改名稱或密碼</small>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- 修改個人資料表單 -->
+                                    <form action="/change_user_info" method="post">
+                                        <div class="form-group">
+                                            <label for="new_name">新名稱</label>
+                                            <input type="text" class="form-control" id="new_name" name="new_name" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="current_password">當前密碼</label>
+                                            <input
+                                                type="password"
+                                                class="form-control"
+                                                id="current_password"
+                                                name="current_password"
+                                            />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="new_password">新密碼</label>
+                                            <input
+                                                type="password"
+                                                class="form-control"
+                                                id="new_password"
+                                                name="new_password"
+                                            />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="confirm_new_password">確認密碼</label>
+                                            <input
+                                                type="password"
+                                                class="form-control"
+                                                id="confirm_new_password"
+                                                name="confirm_new_password"
+                                            />
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">保存變更</button>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <!-- 其他 -->
+                    <div class="subheading mb-3">other</div>
+                    <ul class="fa-ul mb-0">
+                        <li>
+                            <span class="fa-li"><i class="fas fa-check"></i></span>
+                            Adobe Photoshop
+                        </li>
+                        <li>
+                            <span class="fa-li"><i class="fas fa-check"></i></span>
+                            Adobe Illustrator
+                        </li>
+                        <li>
+                            <span class="fa-li"><i class="fas fa-check"></i></span>
+                            Adobe Premiere Pro
+                        </li>
+                        <li>
+                            <span class="fa-li"><i class="fas fa-check"></i></span>
+                            Adobe Lightroom
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="resume-section" id="tool">
+                <div class="resume-section-content">
+                    <h2 class="mb-5" style="margin-top: 30px">小工具</h2>
+                    <div class="subheading mb-3">Tools</div>
+                    <div id="subtitle">點選圖標看更多</div>
+                    <ul class="list-inline dev-icons">
+                        <li class="list-inline-item" onclick="showContent('qrcode')">
+                            <i class="fa-solid fa-qrcode"></i>
+                        </li>
+                        <li class="list-inline-item" onclick="showContent('idcard')">
+                            <i class="fa-regular fa-id-card"></i>
+                        </li>
+                        <li class="list-inline-item" onclick="showContent('map')">
+                            <i class="fa-solid fa-map-location-dot"></i>
+                        </li>
+                    </ul>
+
+                    <div id="qrcodeContent" class="hidden">
+                        <div class="subheading mb-3" id="skill_title">Qrcode</div>
+                        <div id="subtitle">快速產生 QRcode</div>
+                        <div class="input-button-container">
+                            <input type="text" id="urlInput" placeholder="輸入網址" />
+                            <button id="generateButton">產生 QRcode</button>
+                        </div>
+                        <div id="qrcode"></div>
+                    </div>
+
+                    <div id="idcardContent" class="hidden">
+                        <div class="subheading mb-3" id="skill_title">身分證字號產生器</div>
+                        <div id="subtitle">快速產生身分證字號</div>
+
+                        <div class="gender-container">
+                            <!-- 選擇性別 -->
+                            <label for="gender">選擇性別：</label>
+                            <select id="gender">
+                                <option value="male">男生</option>
+                                <option value="female">女生</option>
+                            </select>
+
+                            <!-- 產生身分證字號的按鈕 -->
+                            <button id="generateIdCardButton">產生身分證字號</button>
+                        </div>
+
+                        <!-- 顯示身分證字號 -->
+                        <div id="idcard"></div>
+                    </div>
+
+                    <div id="mapContent" class="hidden">
+                        <div class="subheading mb-3" id="skill_title">Map</div>
+                        <div id="subtitle">取得自己位置</div>
+                        <div id="mapContainer"></div>
+                    </div>
+                </div>
+            </section>
+
+            <hr class="m-0" />
+
+            <!-- 個人興趣-->
+            <section class="resume-section" id="interests">
+                <div class="resume-section-content">
+                    <h2 class="mb-5">個人興趣</h2>
+                    <p>
+                        我是一位非常注重生活品質的人。在放假的時候，我喜歡騎著車前往鄰近的縣市，品味當地的美食、欣賞風景，或是去推薦的景觀咖啡廳，度過一整個下午，沉浸在寧靜的時光，如果待在家裡，我會找一些經典老電影，例如《刺激1995》和《回到未來》等。。來度過悠閒的時光。
+                    </p>
+                    <p class="mb-0">
+                        此外，也因為我注重生活品質，我喜歡收集可愛小物、汽車模型，在購物網上尋找各種喜歡的居家小物品，用它們來裝飾我的家，讓它成為我喜歡的樣子，讓家充滿了個人風格。
+                    </p>
+                </div>
+            </section>
+
+            <hr class="m-0" />
+
+            <!-- 開發經驗-->
+            <section class="resume-section" id="project">
+                <div class="resume-section-content">
+                    <h2 class="mb-5">專案 & 開發經驗</h2>
+                    <ul class="fa-ul mb-0">
+                        <li>
+                            <span class="fa-li"><i class="fa-solid fa-arrow-right"></i></span>
+                            <a href="https://www.naruwan-hotel.com.tw/tw_new/hotel-main.html" target="_blank"
+                                >台東娜路彎大酒店官方網站</a
+                            >
+                        </li>
+
+                        <li>
+                            <span class="fa-li"><i class="fa-solid fa-arrow-right"></i></span>
+                            <a href="https://hongyi360.net/" target="_blank">鴻邑 Hong Yi 360 官方網站</a>
+                        </li>
+
+                        <li>
+                            <span class="fa-li"><i class="fa-solid fa-arrow-right"></i></span>
+                            <a
+                                href="https://github.com/bannywang/back-end-Shopping-center-console-back.git"
+                                target="_blank"
+                                >Bowa學院 Step Brother</a
+                            >
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- back to top button -->
+            <button id="backToTopButton" class="btn btn-primary rounded-circle">
+                <i class="fa-solid fa-arrow-up" style="color: #ffffff"></i>
+            </button>
+        </div>
+
+        <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="../js/scripts.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </body>
+</html>

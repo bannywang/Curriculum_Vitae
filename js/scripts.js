@@ -546,7 +546,6 @@ get_register_form.addEventListener('submit', async (e) => {
             // 如果註冊成功，顯示成功警告
             const username = data.name || '用戶' // 使用返回的用戶名，如果沒有，使用默認名稱
             alert(`恭喜 ${username} 註冊成功`)
-            
 
             // 清空帳號、電話、名字和密碼欄位
             document.getElementById('new_account').value = ''

@@ -5508,6 +5508,10 @@ fieldset:disabled .btn {
     padding: var(--bs-modal-padding);
 }
 
+.modal-body .form-group {
+    margin-top: 25px;
+}
+
 .modal-footer {
     display: flex;
     flex-shrink: 0;
@@ -11411,4 +11415,13 @@ button {
     #map {
         min-height: 200px;
     }
+}
+
+.info-value {
+    color: #000;
+    font-weight: bold;
+}
+
+.user-info-item {
+    margin: 10px;
 }
