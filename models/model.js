@@ -21,46 +21,72 @@ async function get_all_user_info() {
 // 取得用戶資訊
 async function get_user_info(mail, password) {
     try {
-        // 查詢用戶資訊
+        // 查询用户信息
         const [users] = await connection.execute('SELECT * FROM user_info WHERE mail = ? AND password = ?', [
             mail,
             password,
         ])
 
         if (users.length === 1) {
-            // 找到匹配的用戶資訊，返回用戶資料
+            // 找到匹配的用户信息，返回用户数据
             const user = users[0]
-            // 在這裡可以選擇返回需要的用戶資訊字段
+
+            // 格式化时间字段
+            user.create_time = format_date_time(user.create_time)
+            user.update_time = format_date_time(user.update_time)
+
+            // 在这里可以选择返回需要的用户信息字段
             return { success: true, user: user }
         } else {
-            // 找不到匹配的用戶資訊
+            // 找不到匹配的用户信息
             return { success: false, message: '電子郵件或密碼不正確' }
         }
     } catch (error) {
-        // 處理錯誤
-        console.error('取得用戶資訊失敗：', error)
-        return { success: false, message: '取得用戶資訊失敗' }
+        // 处理错误
+        console.error('取得用户信息失败：', error)
+        return { success: false, message: '取得用户信息失败' }
     }
 }
 
 async function use_id_get_user_info(user_id) {
     try {
-        // 查詢用戶資訊
+        // 查詢使用者資訊
         const [users] = await connection.execute('SELECT * FROM user_info WHERE user_id = ?', [user_id])
 
-        if (users.length === 1) {
-            // 找到匹配的用戶資訊，返回用戶資料
-            const user = users[0]
-            // 在這裡可以選擇返回需要的用戶資訊字段
-            return { success: true, user: user }
+        // 格式化時間欄位
+        const formatted_results = users.map((user_data) => {
+            user_data.create_time = format_date_time(user_data.create_time)
+            user_data.update_time = format_date_time(user_data.update_time)
+            return user_data
+        })
+
+        if (formatted_results.length === 1) {
+            console.log(formatted_results[0])
+            // 找到匹配的使用者資訊，返回使用者資料
+            return { success: true, user: formatted_results[0] }
         } else {
-            // 找不到匹配的用戶資訊
-            return { success: false, message: '用戶ID不存在' }
+            // 找不到匹配的使用者資訊
+            return { success: false, message: '使用者ID不存在' }
         }
     } catch (error) {
         // 處理錯誤
-        console.error('根據用戶ID取得用戶資訊失敗：', error)
-        return { success: false, message: '根據用戶ID取得用戶資訊失敗' }
+        console.error('根據使用者ID獲取使用者資訊失敗：', error)
+        return { success: false, message: '根據使用者ID獲取使用者資訊失敗' }
+    }
+}
+
+async function use_mail_get_user_pass(mail) {
+    try {
+        const [rows] = await connection.execute('SELECT password FROM user_info WHERE mail = ?', [mail])
+
+        if (rows.length === 1) {
+            return rows[0].password // 返回找到的使用者的密碼
+        } else {
+            return null // 沒有找到使用者
+        }
+    } catch (error) {
+        console.error('查詢使用者密碼失敗：', error)
+        throw error
     }
 }
 
@@ -93,6 +119,65 @@ async function user_register(name, mail, password) {
         // 處理錯誤
         console.error('註冊失敗：', error)
         return { success: false, message: '註冊失敗' }
+    }
+}
+
+// 修改名稱或密碼
+async function update_password_or_name(mail, current_password, new_password, new_name) {
+    try {
+        if (new_password && new_name) {
+            // 如果提供了新密碼和新名稱，則執行兩個更新操作
+            const [passwordUpdateResults, nameUpdateResults] = await Promise.all([
+                connection.execute('UPDATE user_info SET password = ? WHERE mail = ? AND password = ?', [
+                    new_password,
+                    mail,
+                    current_password,
+                ]),
+                connection.execute('UPDATE user_info SET name = ? WHERE mail = ?', [new_name, mail]),
+            ])
+
+            if (passwordUpdateResults[0].affectedRows === 1 && nameUpdateResults[0].affectedRows === 1) {
+                // 密碼和名稱都成功更新
+                return { success: true, message: '密碼和名稱已成功更新' }
+            } else {
+                // 找不到匹配的使用者或密碼未更改
+                return { success: false, message: '密碼或名稱未更改或使用者不存在' }
+            }
+        } else if (new_password) {
+            // 如果提供了新密碼，則只執行密碼更新操作
+            const [passwordUpdateResults] = await connection.execute(
+                'UPDATE user_info SET password = ? WHERE mail = ? AND password = ?',
+                [new_password, mail, current_password]
+            )
+
+            if (passwordUpdateResults.affectedRows === 1) {
+                // 密碼已成功更新
+                return { success: true, message: '密碼已成功更新' }
+            } else {
+                // 找不到匹配的使用者或密碼未更改
+                return { success: false, message: '密碼未更改或使用者不存在' }
+            }
+        } else if (new_name) {
+            // 如果提供了新名稱，則只執行名稱更新操作
+            const [nameUpdateResults] = await connection.execute('UPDATE user_info SET name = ? WHERE mail = ?', [
+                new_name,
+                mail,
+            ])
+
+            if (nameUpdateResults.affectedRows === 1) {
+                // 名稱已成功更新
+                return { success: true, message: '名稱已成功更新' }
+            } else {
+                // 找不到匹配的使用者
+                return { success: false, message: '使用者不存在' }
+            }
+        } else {
+            return { success: false, message: '未提供新密碼或新名稱' }
+        }
+    } catch (error) {
+        // 處理錯誤
+        console.error('更新密碼或名稱失敗：', error)
+        return { success: false, message: '更新密碼或名稱失敗' }
     }
 }
 
@@ -157,13 +242,13 @@ async function all_logout() {
     }
 }
 
-// all_logout()
-
 module.exports = {
     get_all_user_info,
     get_user_info,
     use_id_get_user_info,
+    use_mail_get_user_pass,
     user_register,
+    update_password_or_name,
     user_login,
     user_logout,
 }

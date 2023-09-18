@@ -179,20 +179,100 @@
                     <!-- 取得帳號 -->
                     <div id="DatabaseContent" class="hidden">
                         <div class="subheading mb-3" id="skill_title">MySQL</div>
-                        <div id="subtitle">查看你的帳號</div>
-                        <form id="get_user_info" action="/get_info" method="get">
-                            <div class="mb-3">
-                                <label for="account" class="form-label">帳號</label>
-                                <input type="text" class="form-control" id="account" name="account" required />
-                            </div>
-                            <div class="mb-3">
-                                <label for="password" class="form-label">密碼</label>
-                                <input type="password" class="form-control" id="password" name="password" required />
-                            </div>
-                            <div id="get_info_results"></div>
-                            <button type="submit" class="btn btn-primary" id="confirm_btn">確認</button>
-                        </form>
+                        <div id="subtitle">查看帳號資訊</div>
+                        <% if (user) { %>
+                        <div class="user-info user-info-item">
+                            <span class="info-label">使用者名稱：</span>
+                            <span class="info-value"><%= user.name %></span>
+                        </div>
+                        <div class="user-info user-info-item">
+                            <span class="info-label">使用者電子郵件：</span>
+                            <span class="info-value"><%= user.mail %></span>
+                        </div>
+                        <div class="user-info user-info-item">
+                            <span class="info-label">帳號建立時間：</span>
+                            <span class="info-value"><%= userInfo.create_time %></span>
+                        </div>
+                        <!-- 在这里添加其他使用者資訊 -->
+                        <% } else { %>
+                        <p>使用者未登入</p>
+                        <% } %>
 
+                        <button
+                            type="button"
+                            class="btn btn-primary"
+                            data-toggle="modal"
+                            data-target="#exampleModalCenter"
+                            style="margin-left: 0px"
+                        >
+                            修改名稱或密碼
+                        </button>
+                    </div>
+
+                    <!-- Button trigger modal -->
+
+                    <!-- Modal -->
+                    <div
+                        class="modal fade"
+                        id="exampleModalCenter"
+                        tabindex="-1"
+                        role="dialog"
+                        aria-labelledby="exampleModalCenterTitle"
+                        aria-hidden="true"
+                    >
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalCenterTitle">修改名稱或密碼</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-header">
+                                    <small class="text-muted">您可以單獨修改名稱或密碼</small>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- 修改個人資料表單 -->
+                                    <form action="/change_user_info" method="post">
+                                        <div class="form-group">
+                                            <label for="new_name">新名稱</label>
+                                            <input type="text" class="form-control" id="new_name" name="new_name" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="current_password">當前密碼</label>
+                                            <input
+                                                type="password"
+                                                class="form-control"
+                                                id="current_password"
+                                                name="current_password"
+                                            />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="new_password">新密碼</label>
+                                            <input
+                                                type="password"
+                                                class="form-control"
+                                                id="new_password"
+                                                name="new_password"
+                                            />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="confirm_new_password">確認密碼</label>
+                                            <input
+                                                type="password"
+                                                class="form-control"
+                                                id="confirm_new_password"
+                                                name="confirm_new_password"
+                                            />
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">保存變更</button>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <br />

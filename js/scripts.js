@@ -565,4 +565,3 @@ get_register_form.addEventListener('submit', async (e) => {
         document.getElementById('new_name').value = ''
     }
 })
-
