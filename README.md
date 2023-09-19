@@ -114,3 +114,16 @@ router.get('/', allCtrl.get_index_ejs)
 
 最後，我要感謝我的 BOWA 學院專題隊友們。通過我們的團隊合作和相互支持，我們一起完成了專案。他們的幫助和合作不僅使我們的專案取得成功，而且也加深了我對這個領域的理解和熱愛。
 
+---
+
+**非營利宣告**
+
+本專案是非營利的，僅用於學術研究和個人展示。所有的引用和使用的資源都是尊重原創者的智慧財產權，並已確保所有內容符合非營利用途的要求。如果你是任何內容的版權持有人並認為我們未能充分尊重你的版權，請聯繫我們，我們將立即採取適當的行動。
+
+---
+
+**引用文件與檔案**
+
+1. **login & user_register page** 👉 https://codepen.io/FlorinPop17/pen/vPKWjd
+2. **front-end HTML & CSS** 👉 https://github.com/StartBootstrap/startbootstrap-resume
+
