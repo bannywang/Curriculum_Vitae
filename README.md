@@ -39,10 +39,11 @@ DB_USER = root
 DB_PASSWORD = 資料庫密碼
 DB_DATABASE = personal_resume
 
-
+# nodemailer 使用
 EMAIL_USER = 你的 Gmail
 EMAIL_PASSWORD = 你的 Google 應用程式密碼
 
+# 隨意輸入
 SECRET = 輸入 session 的金鑰
 ```
 
