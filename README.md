@@ -14,8 +14,6 @@
   - [目錄](#目錄)
   - [安裝指南](#安裝指南)
   - [使用說明](#使用說明)
-  - [範例](#範例)
-  - [API文檔或參考](#api文檔或參考)
   - [貢獻指南](#貢獻指南)
   - [聯繫方式](#聯繫方式)
   - [致謝](#致謝)
@@ -35,7 +33,7 @@ https://github.com/bannywang/Curriculum_Vitae.git
 
 **3.依照資料夾內 user_info.sql 檔的格式在 Mysql 建立 Table**
 
-**34.新增 .env 檔案輸入下列資訊**
+**4.新增 .env 檔案輸入下列資訊**
 
 ``` sh 
 DB_HOST = 127.0.0.1
@@ -44,30 +42,61 @@ DB_PASSWORD = 資料庫密碼
 DB_DATABASE = personal_resume
 
 
-EMAIL_USER = 你的Mail
-EMAIL_PASSWORD = 你的Google應用程式密碼
+EMAIL_USER = 你的 Gmail
+EMAIL_PASSWORD = 你的 Google 應用程式密碼
 
 SECRET = 輸入 session 的金鑰
 ```
-在這裡寫上如何安裝和設置你的專案。
 
 ---
 
 ## 使用說明
 
-在這裡提供一個步驟說明，說明如何使用你的專案或功能。
+請按照以下步驟使用此專案：
+
+1. **啟動專案**：打開 terminal 並輸入以下命令來執行專案:
+   ```sh
+   node index.js
+
+2. **首頁瀏覽**：未登入時，你只能在首頁進行瀏覽。
+3. **登入**：點選 "More" 來登入。如果你還沒有帳號，可以在此進行註冊。
+4. **探索 'More' 頁面**：登入後，你將能看到 "More" 頁面的所有內容。
+5. **查看技能詳情**：在 "More" 頁面中，你可以點選技能圖標來查看更多詳情。
+6. **修改個人資料**：透過點選 "database" 選項（第五個選項），你可以修改你的個人名稱或密碼。
+7. **忘記密碼**：在登入頁中透過點選 "忘記密碼" 選項，你會在註冊時的信箱收到你的密碼。
+8. **聊天室功能 (Beta版)**：嘗試新的聊天室功能，目前仍在 Beta 測試階段。
+9. **探索開發經驗**：透過本功能來探索我的開發經驗。
 
 ---
 
 ## 範例
 
-提供一些範例來顯示你的專案或功能是如何工作的。
+| ![Image 1](./assets/product_example/img%20(1).jpg) | ![Image 2](./assets/product_example/img%20(2).jpg) | ![Image 3](./assets/product_example/img%20(3).jpg) |
+|:-------------------------------------------------:|:-------------------------------------------------:|:-------------------------------------------------:|
+|                       Image 1                      |                       Image 2                      |                       Image 3                      |
+| ![Image 4](./assets/product_example/img%20(4).jpg) | ![Image 5](./assets/product_example/img%20(5).jpg) |                                                  |
+|                       Image 4                      |                       Image 5                      |                                                  |
+
 
 ---
 
 ## API文檔或參考
 
-如果你的專案有API，提供一個API參考來說明如何使用它。
+在專案中，當你在 terminal 中輸入以下命令來啟動伺服器：
+
+```sh
+node index.js
+```
+
+在 terminal 中印出的 
+
+```sh
+console.log(`http://localhost:${port}`)
+```
+
+會使用 GET 的方式取得主頁的連接
+
+```router.get('/', allCtrl.get_index_ejs)```
 
 ---
 
