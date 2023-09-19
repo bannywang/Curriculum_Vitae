@@ -10,10 +10,10 @@ async function get_all_user_info() {
             user_info.create_time = format_date_time(user_info.create_time)
             return user_info
         })
-        console.log('用戶資料', formatted_results)
+        console.log('model回：用戶資料', formatted_results)
         return formatted_results // 回傳用戶資料
     } catch (error) {
-        console.error('無法獲取用戶資料:', error)
+        console.error('model回：無法獲取用戶資料:', error)
         return [] // 回傳空陣列表示發生錯誤或沒有用戶資料
     }
 }
@@ -43,7 +43,7 @@ async function get_user_info(mail, password) {
         }
     } catch (error) {
         // 处理错误
-        console.error('取得用户信息失败：', error)
+        console.error('model回：取得用户信息失败：', error)
         return { success: false, message: '取得用户信息失败' }
     }
 }
@@ -61,7 +61,7 @@ async function use_id_get_user_info(user_id) {
         })
 
         if (formatted_results.length === 1) {
-            console.log(formatted_results[0])
+            console.log('model回：', formatted_results[0])
             // 找到匹配的使用者資訊，返回使用者資料
             return { success: true, user: formatted_results[0] }
         } else {
@@ -70,7 +70,7 @@ async function use_id_get_user_info(user_id) {
         }
     } catch (error) {
         // 處理錯誤
-        console.error('根據使用者ID獲取使用者資訊失敗：', error)
+        console.error('model回：根據使用者ID獲取使用者資訊失敗：', error)
         return { success: false, message: '根據使用者ID獲取使用者資訊失敗' }
     }
 }
@@ -85,7 +85,7 @@ async function use_mail_get_user_pass(mail) {
             return null // 沒有找到使用者
         }
     } catch (error) {
-        console.error('查詢使用者密碼失敗：', error)
+        console.error('model回：查詢使用者密碼失敗：', error)
         throw error
     }
 }
@@ -109,6 +109,7 @@ async function user_register(name, mail, password) {
         ])
 
         if (results.affectedRows === 1) {
+            console.log('model回：註冊成功')
             // 註冊成功
             return { success: true, message: '註冊成功', name: name }
         } else {
@@ -117,7 +118,7 @@ async function user_register(name, mail, password) {
         }
     } catch (error) {
         // 處理錯誤
-        console.error('註冊失敗：', error)
+        console.error('model回：註冊失敗：', error)
         return { success: false, message: '註冊失敗' }
     }
 }
@@ -176,7 +177,7 @@ async function update_password_or_name(mail, current_password, new_password, new
         }
     } catch (error) {
         // 處理錯誤
-        console.error('更新密碼或名稱失敗：', error)
+        console.error('model回：更新密碼或名稱失敗：', error)
         return { success: false, message: '更新密碼或名稱失敗' }
     }
 }
@@ -201,7 +202,7 @@ async function user_login(mail, password) {
         }
     } catch (error) {
         // 處理錯誤
-        console.error('登入失敗：', error)
+        console.error('model回：登入失敗：', error)
         return { success: false, message: '登入失敗' }
     }
 }
@@ -213,13 +214,14 @@ async function user_logout(user_id) {
         const [results] = await connection.execute('UPDATE user_info SET login_statu = 0 WHERE user_id = ?', [user_id])
 
         if (results.affectedRows === 1) {
+            console.log(`model回：user_id 為 ${user_id} 的使用者已登出成功`)
             return { success: true, message: '登出成功' }
         } else {
             return { success: false, message: '登出失败，用户不存在或已经登出' }
         }
     } catch (error) {
         // 处理错误
-        console.error('登出失败：', error)
+        console.error('model回：登出失败：', error)
         return { success: false, message: '登出失败' }
     }
 }
@@ -232,13 +234,13 @@ async function all_logout() {
 
         // 檢查更新是否成功
         if (result.affectedRows > 0) {
-            console.log('成功將所有人的 login_statu 設置為 0')
+            console.log('model回：成功將所有人的 login_statu 設置為 0')
         } else {
-            console.log('沒有更新任何記錄')
+            console.log('model回：沒有更新任何記錄')
         }
     } catch (error) {
         // 處理錯誤
-        console.error('更新 login_statu 失敗：', error)
+        console.error('model回：更新 login_statu 失敗：', error)
     }
 }
 
@@ -251,4 +253,5 @@ module.exports = {
     update_password_or_name,
     user_login,
     user_logout,
+    all_logout,
 }

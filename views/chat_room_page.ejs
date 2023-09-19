@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="../css/chat_room.css" />
+        <title><%= pageTitle %></title>
+    </head>
+    <body>
+        <h1>聊天室</h1>
+
+        <!-- 房间选择 -->
+        <div class="room-selection">
+            <label for="room">選擇房間：</label>
+            <select id="room">
+                <option value="room1">房間1</option>
+                <option value="room2">房間2</option>
+                <!-- 可以添加更多房间选项 -->
+            </select>
+        </div>
+
+        <!-- 聊天窗口 -->
+        <div class="chat-window">
+            <div class="messages" id="messages">
+                <!-- 聊天消息将会显示在这里 -->
+            </div>
+            <input type="text" id="messageInput" placeholder="輸入訊息..." />
+            <button id="sendButton">發送</button>
+        </div>
+        <script>
+            const userName = '<%= userName %>'
+        </script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="/js/chat_room.js"></script>
+    </body>
+</html>

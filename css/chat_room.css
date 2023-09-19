@@ -1,0 +1,190 @@
+/* Reset some default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Set a background color and font for the entire page */
+body {
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+}
+
+/* Center the chat room title */
+h1 {
+    text-align: center;
+    margin: 20px 0;
+    color: #333;
+}
+
+/* Style the room selection dropdown */
+.room-selection {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+    font-size: 16px;
+    color: #555;
+}
+
+#room {
+    padding: 8px;
+    font-size: 14px;
+}
+
+/* Style the chat window */
+.chat-window {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Style the chat messages */
+.messages {
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.messages p {
+    margin: 5px 0;
+}
+
+/* Style the message input and send button */
+#messageInput {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+#sendButton {
+    display: block;
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+#sendButton:hover {
+    background-color: #0056b3;
+}
+
+/* Style the chat messages to differentiate between sender and receiver */
+.sender {
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 10px;
+    padding: 8px 12px;
+    margin-right: 10px;
+    display: inline-block;
+    max-width: 70%;
+    word-wrap: break-word;
+}
+
+.receiver {
+    background-color: #f0f0f0;
+    color: #333;
+    border-radius: 10px;
+    padding: 8px 12px;
+    margin-left: 10px;
+    display: inline-block;
+    max-width: 70%;
+    word-wrap: break-word;
+}
+
+/* Style the input placeholder */
+#messageInput::placeholder {
+    color: #999;
+}
+
+/* Style the room selection dropdown arrow */
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: transparent url('../images/dropdown-arrow.png') no-repeat right center;
+    background-size: 12px;
+    padding-right: 30px;
+}
+
+/* Add a hover effect for room selection */
+#room:hover {
+    background-color: #f5f5f5;
+}
+
+/* Style the scrollbar for chat messages */
+.messages::-webkit-scrollbar {
+    width: 8px;
+}
+
+.messages::-webkit-scrollbar-thumb {
+    background-color: #ddd;
+    border-radius: 4px;
+}
+
+/* Add a subtle shadow to the chat window */
+.chat-window {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.messages div {
+    margin-bottom: 10px;
+}
+
+/* Differentiate sender and receiver messages */
+.sender {
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 10px;
+    padding: 8px 12px;
+    margin: 5px 10px 5px 50px; /* Adjusted margins */
+    display: inline-block;
+    max-width: 70%;
+    word-wrap: break-word;
+    text-align: left; /* Added text alignment */
+}
+
+.receiver {
+    background-color: #f0f0f0;
+    color: #333;
+    border-radius: 10px;
+    padding: 8px 12px;
+    margin: 5px 50px 5px 10px; /* Adjusted margins */
+    display: inline-block;
+    max-width: 70%;
+    word-wrap: break-word;
+    text-align: left; /* Added text alignment */
+}
+
+/* ... */
+
+/* Style the room selection dropdown arrow */
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: transparent
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"><path d="M6 9l4-6H2l4 6z" fill="#000"/></svg>')
+        no-repeat right 0.7em center; /* Replaced with SVG */
+    background-size: 12px;
+    padding-right: 30px;
+}
+
+/* ... */

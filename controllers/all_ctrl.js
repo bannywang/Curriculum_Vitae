@@ -28,12 +28,32 @@ async function get_main_ejs(req, res) {
             })
         } else {
             // 處理獲取使用者資訊失敗的情況
-            console.error('獲取使用者資訊失敗：', userInfoResult.message)
+            console.error('ctrl回：獲取使用者資訊失敗：', userInfoResult.message)
             res.status(500).json({ success: false, message: '獲取使用者資訊失敗' })
         }
     } catch (error) {
         // 處理錯誤
-        console.error('HTTP請求處理失敗：', error)
+        console.error('ctrl回：HTTP請求處理失敗：', error)
+        res.status(500).json({ success: false, message: '伺服器錯誤' })
+    }
+}
+
+// 聊天室頁面
+async function get_chat_room_ejs(req, res) {
+    try {
+        const user_id = req.session.user.user_id
+        // 獲取使用者資訊
+        const userInfoResult = await model.use_id_get_user_info(user_id)
+
+        if (userInfoResult.success) {
+            res.render('chat_room_page', {
+                pageTitle: '聊天室',
+                userName: userInfoResult.user.name,
+            })
+        }
+    } catch (error) {
+        // 處理錯誤
+        console.error('ctrl回：HTTP請求處理失敗：', error)
         res.status(500).json({ success: false, message: '伺服器錯誤' })
     }
 }
@@ -43,7 +63,7 @@ async function handle_nodejs_post_request(req, res) {
     const userInput = req.body.userInput
     const processedData = `伺服器：您輸入的文字是：${userInput}`
 
-    console.log(processedData)
+    console.log(`ctrl回： ${processedData}`)
 
     // 將處理後的數據回傳給前端
     res.json({ message: processedData })
@@ -74,16 +94,18 @@ async function perform_registration(req, res) {
 
         const registrationResult = await model.user_register(name, mail, password)
 
-        // 如果註冊成功，返回 JSON 響應
+        // 如果註冊成功，自動登錄
         if (registrationResult.success) {
-            return res.status(200).json({ success: true, message: '註冊成功', name: registrationResult.name })
+            req.body.email = mail
+            req.body.password = password
+            await perform_login(req, res)
         } else {
-            return res.status(400).json({ success: false, message: registrationResult.message || '註冊失敗' })
+            res.redirect('/login_page')
         }
     } catch (error) {
         // 處理錯誤
-        console.error('HTTP請求處理失敗：', error)
-        res.status(500).json({ success: false, message: '伺服器錯誤' })
+        console.error('ctrl回：HTTP請求處理失敗：', error)
+        res.redirect('/login_page')
     }
 }
 
@@ -109,7 +131,7 @@ async function perform_update_password_or_name(req, res) {
             // 清除 session，以使使用者需要重新登入
             req.session.destroy((err) => {
                 if (err) {
-                    console.error('清除 session 失敗：', err)
+                    console.error('ctrl回：清除 session 失敗：', err)
                     return res.status(500).json({ success: false, message: '清除 session 失敗' })
                 }
 
@@ -133,13 +155,13 @@ async function perform_login(req, res) {
         const loginResult = await model.user_login(email, password)
 
         if (loginResult.success) {
-            console.log('登入成功')
+            console.log('ctrl回：登入成功')
 
             // 存儲使用者信息在 session 中
             req.session.user = loginResult.user
             res.redirect('/main')
         } else {
-            console.log('登入失敗')
+            console.log('ctrl回：登入失敗')
 
             // 登入失敗，將訊息返回到前端
             res.redirect('/login_page')
@@ -164,7 +186,7 @@ async function perform_logout(req, res) {
             if (logoutResult.success) {
                 // 從 session 中移除使用者資訊
                 req.session.user = null
-                console.log('登出成功')
+                console.log('ctrl回：登出成功')
                 res.redirect('/') // 重定向到主頁或其他適當的頁面
             } else {
                 res.status(500).json({ success: false, message: '登出失敗' })
@@ -174,7 +196,7 @@ async function perform_logout(req, res) {
         }
     } catch (error) {
         // 處理錯誤
-        console.error('登出失敗：', error)
+        console.error('ctrl回：登出失敗：', error)
         res.status(500).json({ success: false, message: '登出失敗' })
     }
 }
@@ -196,7 +218,7 @@ async function handle_forgot_password(req, res) {
                 '您的密碼是：' +
                 userPassword +
                 ' (請勿將您的密碼告知他人)\n\n' +
-                '\n\n' + 
+                '\n\n' +
                 '感謝您使用我們的服務！\n\n' +
                 '祝您一天愉快！\n\n' +
                 '順頌時期，\n\n' +
@@ -227,6 +249,7 @@ module.exports = {
     handle_nodejs_post_request,
     get_login_page,
     get_forgot_password_page,
+    get_chat_room_ejs,
     perform_registration,
     perform_update_password_or_name,
     perform_login,
