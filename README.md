@@ -21,7 +21,7 @@
 
 ## 安裝指南
 
-**1.請先至我的 GitHub Clone 這份專案至本地 ✔️**
+**1.請先 Clone 專案至本地 ✔️**
 
 HTTPS：
 https://github.com/bannywang/Curriculum_Vitae.git
