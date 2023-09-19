@@ -34,16 +34,17 @@ https://github.com/bannywang/Curriculum_Vitae.git
 **4.新增 .env 檔案輸入下列資訊 ✔️**
 
 ``` sh 
+# SQL 用
 DB_HOST = 127.0.0.1
 DB_USER = root
 DB_PASSWORD = 資料庫密碼
 DB_DATABASE = personal_resume
 
-# nodemailer 使用
+# nodemailer 用
 EMAIL_USER = 你的 Gmail
 EMAIL_PASSWORD = 你的 Google 應用程式密碼
 
-# 隨意輸入
+# 簽名 session cookies，可自行輸入
 SECRET = 輸入 session 的金鑰
 ```
 
