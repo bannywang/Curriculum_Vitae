@@ -14,6 +14,9 @@
   - [目錄](#目錄)
   - [安裝指南](#安裝指南)
   - [使用說明](#使用說明)
+      - [響應格式](#響應格式)
+      - [錯誤處理](#錯誤處理)
+      - [注意事項](#注意事項)
   - [聯繫方式](#聯繫方式)
   - [感謝](#感謝)
 ---
@@ -29,7 +32,7 @@ https://github.com/bannywang/Curriculum_Vitae.git
 
 ```npm install```
 
-**3.依照資料夾內 user_info.sql 檔的格式在 Mysql 建立 Table**
+**3.依照資料夾內 user_info.sql  Mysql 建立對應 Table**
 
 **4.新增 .env 檔案輸入下列資訊 ✔️**
 
@@ -79,25 +82,50 @@ SECRET = 輸入 session 的金鑰
 
 ---
 
-## API文檔或參考
+## API 文檔或參考
 
-✔️ 在專案中，當你在 terminal 中輸入以下命令來啟動伺服器：
+#### 註冊 API
 
-```sh
-node index.js
+#### HTTP 方法和端點
+- **HTTP 方法**: POST
+- **端點**: `/user_register`
+
+#### 請求參數
+- **new_name** (string): 新用戶的名字。
+- **new_email** (string): 新用戶的電子郵件地址，必須是唯一的。
+- **new_password** (string): 新用戶的密碼。
+
+#### 請求示例
+```json
+{
+    "new_name": "your_name",
+    "new_email": "your_email",
+    "new_password": "your_password_here"
+}
 ```
-
-✔️ 在 terminal 中印出的 
-
-```sh
-console.log(`http://localhost:${port}`)
+#### 響應格式
+**成功響應**
+```json
+{
+    "success": true,
+    "message": "註冊成功",
+    "name": "your_name"
+}
 ```
-
-✔️ 會使用 GET 的方式取得主頁的連接
-
-```sh
-router.get('/', allCtrl.get_index_ejs)
+**失敗響應**
+```json
+{
+    "success": false,
+    "message": "電子郵件已存在，註冊失敗"
+}
 ```
+#### 錯誤處理
+**如果在處理請求時發生錯誤，API將重新導向到/login_page，並在控制台中記錄錯誤詳情。**
+
+#### 注意事項
+1. **用戶註冊成功後，系統將自動執行登錄操作。**
+2. **電子郵件地址必須是唯一的，否則註冊將失敗。**
+
 
 ---
 ## 聯繫方式

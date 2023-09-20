@@ -90,7 +90,7 @@ async function use_mail_get_user_pass(mail) {
     }
 }
 
-// 註冊 (account,name不能重複)
+// 註冊 (電子郵件不能重複)
 async function user_register(name, mail, password) {
     try {
         // 檢查是否存在相同的電子郵件
