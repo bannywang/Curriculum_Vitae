@@ -104,7 +104,7 @@ SECRET = 輸入 session 的金鑰
 }
 ```
 #### 響應格式
-**成功響應**
+- **成功響應**
 ```json
 {
     "success": true,
@@ -112,7 +112,7 @@ SECRET = 輸入 session 的金鑰
     "name": "your_name"
 }
 ```
-**失敗響應**
+- **失敗響應**
 ```json
 {
     "success": false,
