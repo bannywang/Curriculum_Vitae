@@ -8,7 +8,7 @@
 /* Set a background color and font for the entire page */
 body {
     background-color: #f0f0f0;
-    font-family: Arial, sans-serif;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
 }
 
 /* Center the chat room title */
@@ -33,6 +33,8 @@ label {
 #room {
     padding: 8px;
     font-size: 14px;
+    border-radius: 5px; /* Added border radius */
+    border: 1px solid #ddd; /* Added border */
 }
 
 /* Style the chat window */
@@ -53,6 +55,7 @@ label {
     border: 1px solid #ddd;
     border-radius: 5px;
     padding: 10px;
+    margin-bottom: 10px; /* Added margin */
 }
 
 .messages p {
@@ -61,17 +64,18 @@ label {
 
 /* Style the message input and send button */
 #messageInput {
-    width: 100%;
+    width: calc(100% - 85px); /* Adjusted width to fit alongside the button */
     padding: 8px;
     font-size: 14px;
     border: 1px solid #ddd;
     border-radius: 5px;
     margin-top: 10px;
+    display: inline-block; /* Changed to inline block */
 }
 
 #sendButton {
-    display: block;
-    width: 100%;
+    display: inline-block; /* Changed to inline block */
+    width: 75px;
     padding: 8px;
     font-size: 16px;
     background-color: #007bff;
@@ -86,105 +90,57 @@ label {
     background-color: #0056b3;
 }
 
-/* Style the chat messages to differentiate between sender and receiver */
-.sender {
-    background-color: #007bff;
-    color: #fff;
-    border-radius: 10px;
-    padding: 8px 12px;
-    margin-right: 10px;
-    display: inline-block;
-    max-width: 70%;
-    word-wrap: break-word;
-}
-
-.receiver {
-    background-color: #f0f0f0;
-    color: #333;
-    border-radius: 10px;
-    padding: 8px 12px;
-    margin-left: 10px;
-    display: inline-block;
-    max-width: 70%;
-    word-wrap: break-word;
-}
-
-/* Style the input placeholder */
-#messageInput::placeholder {
-    color: #999;
-}
-
-/* Style the room selection dropdown arrow */
-select {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background: transparent url('../images/dropdown-arrow.png') no-repeat right center;
-    background-size: 12px;
-    padding-right: 30px;
-}
-
-/* Add a hover effect for room selection */
-#room:hover {
-    background-color: #f5f5f5;
-}
-
-/* Style the scrollbar for chat messages */
-.messages::-webkit-scrollbar {
-    width: 8px;
-}
-
-.messages::-webkit-scrollbar-thumb {
-    background-color: #ddd;
-    border-radius: 4px;
-}
-
-/* Add a subtle shadow to the chat window */
-.chat-window {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.messages div {
-    margin-bottom: 10px;
-}
-
-/* Differentiate sender and receiver messages */
-.sender {
-    background-color: #007bff;
-    color: #fff;
-    border-radius: 10px;
-    padding: 8px 12px;
-    margin: 5px 10px 5px 50px; /* Adjusted margins */
-    display: inline-block;
-    max-width: 70%;
-    word-wrap: break-word;
-    text-align: left; /* Added text alignment */
-}
-
-.receiver {
-    background-color: #f0f0f0;
-    color: #333;
-    border-radius: 10px;
-    padding: 8px 12px;
-    margin: 5px 50px 5px 10px; /* Adjusted margins */
-    display: inline-block;
-    max-width: 70%;
-    word-wrap: break-word;
-    text-align: left; /* Added text alignment */
-}
-
 /* ... */
 
-/* Style the room selection dropdown arrow */
-select {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background: transparent
-        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"><path d="M6 9l4-6H2l4 6z" fill="#000"/></svg>')
-        no-repeat right 0.7em center; /* Replaced with SVG */
-    background-size: 12px;
-    padding-right: 30px;
+/* Additional styles for sender and receiver message bubbles */
+.sender {
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 15px; /* Increased border radius */
+    padding: 8px 12px;
+    margin: 5px 10px 5px 50px;
+    display: inline-block;
+    max-width: 70%;
+    word-wrap: break-word;
+    text-align: left;
+    position: relative; /* Added position relative */
+}
+
+.sender::after {
+    content: '';
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border-left: 10px solid #007bff;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+}
+
+.receiver {
+    background-color: #f0f0f0;
+    color: #333;
+    border-radius: 15px; /* Increased border radius */
+    padding: 8px 12px;
+    margin: 5px 50px 5px 10px;
+    display: inline-block;
+    max-width: 70%;
+    word-wrap: break-word;
+    text-align: left;
+    position: relative; /* Added position relative */
+}
+
+.receiver::after {
+    content: '';
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border-right: 10px solid #f0f0f0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
 }
 
 /* ... */

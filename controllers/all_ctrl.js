@@ -96,9 +96,25 @@ async function perform_registration(req, res) {
 
         // 如果註冊成功，自動登錄
         if (registrationResult.success) {
-            req.body.email = mail
-            req.body.password = password
-            await perform_login(req, res)
+            const subject = '註冊結果'
+            const text =
+                `親愛的 ${name}，\n\n` +
+                '恭喜您註冊成功。\n\n' +
+                '請使用您的電子郵件地址和密碼進行登入。\n\n' +
+                '\n\n' +
+                '感謝您使用我們的服務！\n\n' +
+                '祝您一天愉快！\n\n' +
+                '順頌時期，\n\n' +
+                '您的服務團隊' // 郵件內容
+
+            const emailResult = await tool.sendEmail(mail, subject, text)
+
+            if (emailResult.success) {
+                res.redirect('/login_page')
+            } else {
+                console.error('發送註冊郵件失敗：', emailResult.error)
+                res.redirect('/login_page')
+            }
         } else {
             res.redirect('/login_page')
         }

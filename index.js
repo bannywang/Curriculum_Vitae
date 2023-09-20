@@ -48,7 +48,7 @@ setup_socket_io(server)
 
 // 关闭服务器将所有用户踢下线
 process.on('SIGINT', async () => {
-    console.log('收到 SIGINT 信号，正在关闭服务器...')
+    console.log('收到 SIGINT 信號，正在關閉伺服器...')
 
     try {
         // 在服务器关闭时执行所有注销操作
