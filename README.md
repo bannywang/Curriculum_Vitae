@@ -30,7 +30,7 @@ https://github.com/bannywang/Curriculum_Vitae.git
 
 **2.打開編輯器下載所需套件 ✔️**
 
-```npm install```
+```npm i```
 
 **3.依照資料夾內 user_info.sql  Mysql 建立對應 Table**
 
