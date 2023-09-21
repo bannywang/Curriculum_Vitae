@@ -16,7 +16,7 @@ function setup_socket_io(server) {
         })
 
         socket.on('disconnect', () => {
-            console.log('中斷連接')
+            console.log('使用者中斷')
         })
     })
 }

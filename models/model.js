@@ -2,7 +2,7 @@ const { connection } = require('../database/connection')
 const { format_date_time } = require('../models/tool') // 格式化時間
 
 // 取得全部使用者資訊
-async function get_all_user_info() {
+const get_all_user_info = async () => {
     try {
         const query = 'SELECT * FROM user_info'
         const [results] = await connection.query(query)
@@ -10,7 +10,6 @@ async function get_all_user_info() {
             user_info.create_time = format_date_time(user_info.create_time)
             return user_info
         })
-        console.log('model回：用戶資料', formatted_results)
         return formatted_results // 回傳用戶資料
     } catch (error) {
         console.error('model回：無法獲取用戶資料:', error)
@@ -19,7 +18,7 @@ async function get_all_user_info() {
 }
 
 // 取得用戶資訊
-async function get_user_info(mail, password) {
+const get_user_info = async (mail, password) => {
     try {
         // 查询用户信息
         const [users] = await connection.execute('SELECT * FROM user_info WHERE mail = ? AND password = ?', [
@@ -48,7 +47,7 @@ async function get_user_info(mail, password) {
     }
 }
 
-async function use_id_get_user_info(user_id) {
+const use_id_get_user_info = async (user_id) => {
     try {
         // 查詢使用者資訊
         const [users] = await connection.execute('SELECT * FROM user_info WHERE user_id = ?', [user_id])
@@ -61,7 +60,6 @@ async function use_id_get_user_info(user_id) {
         })
 
         if (formatted_results.length === 1) {
-            console.log('model回：', formatted_results[0])
             // 找到匹配的使用者資訊，返回使用者資料
             return { success: true, user: formatted_results[0] }
         } else {
@@ -75,7 +73,7 @@ async function use_id_get_user_info(user_id) {
     }
 }
 
-async function use_mail_get_user_pass(mail) {
+const use_mail_get_user_pass = async (mail) => {
     try {
         const [rows] = await connection.execute('SELECT password FROM user_info WHERE mail = ?', [mail])
 
@@ -91,7 +89,7 @@ async function use_mail_get_user_pass(mail) {
 }
 
 // 註冊 (電子郵件不能重複)
-async function user_register(name, mail, password) {
+const user_register = async (name, mail, password) => {
     try {
         // 檢查是否存在相同的電子郵件
         const [existingUsers] = await connection.execute('SELECT * FROM user_info WHERE mail = ?', [mail])
@@ -124,7 +122,7 @@ async function user_register(name, mail, password) {
 }
 
 // 修改名稱或密碼
-async function update_password_or_name(mail, current_password, new_password, new_name) {
+const update_password_or_name = async (mail, current_password, new_password, new_name) => {
     try {
         if (new_password && new_name) {
             // 如果提供了新密碼和新名稱，則執行兩個更新操作
@@ -183,7 +181,7 @@ async function update_password_or_name(mail, current_password, new_password, new
 }
 
 // 登入
-async function user_login(mail, password) {
+const user_login = async (mail, password) => {
     try {
         // 查詢用戶資訊
         const [users] = await connection.execute('SELECT * FROM user_info WHERE mail = ? AND password = ?', [
@@ -208,7 +206,7 @@ async function user_login(mail, password) {
 }
 
 // 登出
-async function user_logout(user_id) {
+const user_logout = async (user_id) => {
     try {
         // 在数据库中将用户的登录状态 `login_statu` 设置为 0
         const [results] = await connection.execute('UPDATE user_info SET login_statu = 0 WHERE user_id = ?', [user_id])
@@ -227,7 +225,7 @@ async function user_logout(user_id) {
 }
 
 // 將所有使用者踢下線
-async function all_logout() {
+const all_logout = async () => {
     try {
         // 執行 SQL 更新查詢，將所有人的 login_statu 設置為 0
         const [result] = await connection.execute('UPDATE user_info SET login_statu = 0')

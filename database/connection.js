@@ -9,7 +9,7 @@ const connection = mysql.createPool({
 })
 
 // 測試資料庫連線
-async function test_connection() {
+const test_connection = async () => {
     try {
         // 獲取資料庫連線
         const conn = await connection.getConnection()
@@ -20,6 +20,7 @@ async function test_connection() {
         console.error('無法連線到資料庫:', error)
     }
 }
+
 module.exports = {
     connection,
 }

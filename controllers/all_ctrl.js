@@ -2,8 +2,7 @@ const tool = require('../models/tool')
 const model = require('../models/model')
 
 // 主頁
-async function get_index_ejs(req, res) {
-    // 渲染名為 'ejs-example' 的 EJS 模板，並傳遞動態數據
+const get_index_ejs = async (req, res) => {
     res.render('index', {
         pageTitle: '王瀚邑的個人履歷',
         username: '王瀚邑',
@@ -11,35 +10,29 @@ async function get_index_ejs(req, res) {
 }
 
 // 個人更多頁
-async function get_main_ejs(req, res) {
+const get_main_ejs = async (req, res) => {
     try {
-        // 因為你已經使用了 check_login 中間件來驗證登入狀態，所以可以確保使用者已登入
         const user_id = req.session.user.user_id
-
-        // 獲取使用者資訊
         const userInfoResult = await model.use_id_get_user_info(user_id)
 
         if (userInfoResult.success) {
-            // 渲染 main.ejs 並傳遞使用者資訊
             res.render('main', {
                 pageTitle: '詳細資訊',
-                user: req.session.user, // 使用者基本資訊
-                userInfo: userInfoResult.user, // 使用者詳細資訊
+                user: req.session.user,
+                userInfo: userInfoResult.user,
             })
         } else {
-            // 處理獲取使用者資訊失敗的情況
             console.error('ctrl回：獲取使用者資訊失敗：', userInfoResult.message)
             res.status(500).json({ success: false, message: '獲取使用者資訊失敗' })
         }
     } catch (error) {
-        // 處理錯誤
         console.error('ctrl回：HTTP請求處理失敗：', error)
         res.status(500).json({ success: false, message: '伺服器錯誤' })
     }
 }
 
 // 聊天室頁面
-async function get_chat_room_ejs(req, res) {
+const get_chat_room_ejs = async (req, res) => {
     try {
         const user_id = req.session.user.user_id
         // 獲取使用者資訊
@@ -59,7 +52,7 @@ async function get_chat_room_ejs(req, res) {
 }
 
 // 前端傳回文字加以處理回傳
-async function handle_nodejs_post_request(req, res) {
+const handle_nodejs_post_request = async (req, res) => {
     const userInput = req.body.userInput
     const processedData = `伺服器：您輸入的文字是：${userInput}`
 
@@ -70,14 +63,14 @@ async function handle_nodejs_post_request(req, res) {
 }
 
 // 取得登入頁面
-async function get_login_page(req, res) {
+const get_login_page = async (req, res) => {
     res.render('login_page', {
         pageTitle: '登入頁面',
     })
 }
 
 // 忘記密碼頁面
-async function get_forgot_password_page(req, res) {
+const get_forgot_password_page = async (req, res) => {
     res.render('forgot_password_page', {
         pageTitle: '忘記密碼',
     })
@@ -86,7 +79,7 @@ async function get_forgot_password_page(req, res) {
 // ----------------------------------------------------------------
 
 // 註冊
-async function perform_registration(req, res) {
+const perform_registration = async (req, res) => {
     try {
         const name = req.body.new_name
         const mail = req.body.new_email
@@ -126,7 +119,7 @@ async function perform_registration(req, res) {
 }
 
 // 改密碼或名字
-async function perform_update_password_or_name(req, res) {
+const perform_update_password_or_name = async (req, res) => {
     try {
         // 從請求中獲取當前用戶信息和要更新的信息
         const current_user = req.session.user
@@ -163,7 +156,7 @@ async function perform_update_password_or_name(req, res) {
 }
 
 // 登入
-async function perform_login(req, res) {
+const perform_login = async (req, res) => {
     try {
         const email = req.body.email
         const password = req.body.password
@@ -190,7 +183,7 @@ async function perform_login(req, res) {
 }
 
 // 登出
-async function perform_logout(req, res) {
+const perform_logout = async (req, res) => {
     try {
         if (req.session.user) {
             // 獲取使用者的 user_id
@@ -218,7 +211,7 @@ async function perform_logout(req, res) {
 }
 
 // 忘記密碼
-async function handle_forgot_password(req, res) {
+const handle_forgot_password = async (req, res) => {
     try {
         const email = req.body.email // 從 POST 請求中獲取電子郵件地址
 
